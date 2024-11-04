@@ -1,0 +1,18 @@
+# Excluir formatos de archivo
+*.mp3
+*.mp4
+*.wav
+
+# Excluir directorios
+backups/
+canciones/
+CanicasBrawl/
+Capcut/
+character/
+images/
+Jales/
+ligacanicas/
+Metricool/
+parche huggingface/
+Production/
+raw production/

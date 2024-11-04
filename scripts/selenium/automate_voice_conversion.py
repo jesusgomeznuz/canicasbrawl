@@ -1,0 +1,156 @@
+import csv
+import os
+import subprocess
+import time
+import pandas as pd
+import sys
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from glob import glob  # Importación añadida
+
+def load_voice_models(csv_path):
+    voice_models = {}
+    with open(csv_path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            voice_models[row['nickname']] = row['value']
+    return voice_models
+
+def convert_audio_with_selenium(nickname, audio_file_path, selected_model, output_path):
+    driver_path = "C:/chromedriver-win64/chromedriver.exe"
+    service = Service(driver_path)
+    driver = webdriver.Chrome(service=service)
+    driver.get("http://127.0.0.1:6969/")
+
+    try:
+        dropdown_trigger = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "input[aria-label='Modelo de voz']"))
+        )
+        dropdown_trigger.click()
+        print("Dropdown encontrado y clicado")
+
+        options_container = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "ul[role='listbox']"))
+        )
+        print("Opciones encontradas")
+
+        options = options_container.find_elements(By.CSS_SELECTOR, "li")
+        for option in options:
+            print(f"Opción encontrada: {option.text.strip()}")
+
+        option_to_select = None
+        for option in options:
+            if selected_model in option.text:
+                option_to_select = option
+                break
+
+        if option_to_select:
+            option_to_select.click()
+            print("Opción coincidente encontrada y clicada")
+        else:
+            print(f"No se encontró la opción '{selected_model}' en el dropdown.")
+
+        selected_value = dropdown_trigger.get_attribute("value")
+        print(f"Opción seleccionada: {selected_value}")
+        if selected_value != selected_model:
+            raise ValueError(f"La opción seleccionada no coincide: {selected_value} != {selected_model}")
+
+        time.sleep(2)
+        upload_input = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
+        upload_input.send_keys(audio_file_path)
+        print(f"Archivo subido: {audio_file_path}")
+
+        time.sleep(5)
+        convert_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "component-45"))
+        )
+        convert_button.click()
+        print("Botón de convertir clicado")
+
+        print("Esperando a que aparezca el botón de descarga...")
+        download_button = WebDriverWait(driver, 300).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Download']"))
+        )
+        download_button.click()
+        print("Botón de descarga clicado")
+
+        download_url = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a[download]"))
+        ).get_attribute("href")
+        print(f"URL del archivo de descarga: {download_url}")
+
+        output_file_path = os.path.join(output_path, f"{nickname}.wav")
+        subprocess.run(["curl", "-o", output_file_path, download_url])
+        print(f"Archivo descargado y movido a {output_file_path}")
+
+        if not os.path.exists(audio_file_path):
+            raise FileNotFoundError(f"El archivo {audio_file_path} no se encontró después de la conversión.")
+    finally:
+        driver.quit()
+
+    return output_file_path
+
+def list_subfolders(directory, exclude=None):
+    exclude = exclude or []
+    subfolders = [f.name for f in os.scandir(directory) if f.is_dir() and f.name not in exclude]
+    return sorted(subfolders)
+
+def find_earliest_run_with_video(directory):
+    subfolders = [f.path for f in os.scandir(directory) if f.is_dir()]
+    for subfolder in sorted(subfolders, key=lambda x: int(os.path.basename(x))):
+        mp4_files = glob(os.path.join(subfolder, "*.mp4"))
+        if mp4_files:
+            return subfolder, mp4_files[0]
+    raise FileNotFoundError("No se encontraron subcarpetas con archivos .mp4")
+
+# Main logic
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Uso: python automate_voice_conversion.py <nombre_de_la_canción>")
+        sys.exit(1)
+
+    selected_song = sys.argv[1]
+
+    audio_base_path = r"C:\audios"
+    output_path = os.path.join(audio_base_path, selected_song)
+
+    audio_file_path_mp3 = os.path.join(output_path, "voz.mp3")
+    audio_file_path_wav = os.path.join(output_path, "voz.wav")
+    if os.path.exists(audio_file_path_mp3):
+        audio_file_path = audio_file_path_mp3
+    elif os.path.exists(audio_file_path_wav):
+        audio_file_path = audio_file_path_wav
+    else:
+        raise FileNotFoundError("No se encontró el archivo voz.mp3 o voz.wav en la carpeta seleccionada.")
+
+    print(f"Archivo de audio encontrado: {audio_file_path}")
+
+    voice_models = load_voice_models(os.path.join(audio_base_path, "selenium", "voices.csv"))
+
+    winner_log_path = r"C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame\winner_log.csv"
+    if not os.path.exists(winner_log_path):
+        raise FileNotFoundError(f"El archivo {winner_log_path} no existe.")
+    winner_data = pd.read_csv(winner_log_path)
+
+    participants = winner_data['Nickname'].unique()
+
+    all_exist = True
+    for nickname in participants:
+        nickname_lower = nickname.lower()
+        player_audio_path_mp3 = os.path.join(output_path, f"{nickname_lower}.mp3")
+        player_audio_path_wav = os.path.join(output_path, f"{nickname_lower}.wav")
+        if nickname_lower in voice_models:
+            if not os.path.exists(player_audio_path_mp3) and not os.path.exists(player_audio_path_wav):
+                print(f"Generando audio para {nickname}...")
+                convert_audio_with_selenium(nickname_lower, audio_file_path, voice_models[nickname_lower], output_path)
+                all_exist = False
+            else:
+                print(f"El archivo para {nickname} ya existe. Omite la generación.")
+
+    if all_exist:
+        print("Todas las pistas de audio ya existen. No se generó ninguna nueva pista.")
+
+    print("Proceso completado.")
