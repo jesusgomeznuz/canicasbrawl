@@ -18,6 +18,8 @@ runs_directory = r"D:\canicasbrawl\Runs"
 voice_URLS = r"D:\canicasbrawl\scripts\jammable.csv"
 raw_production_folder = r"D:\canicasbrawl\raw production"
 download_dir = "C:/Users/LENOVO/Downloads/"
+email = os.environ.get('JAMMABLE_EMAIL')
+password = os.environ.get('JAMMABLE_PASSWORD')
 
 def cancion_ya_producida(song_name, raw_production_folder):
     # Revisa si existen archivos relacionados con la canción en la carpeta 'raw production'
@@ -91,9 +93,9 @@ def convert_audio_with_selenium(links_nicknames, song_name):
         time.sleep(1)
 
         email_field = driver.find_element(By.NAME, "email")
-        email_field.send_keys("info@canicasbrawl.com")
+        email_field.send_keys(email)
         password_field = driver.find_element(By.NAME, "password")
-        password_field.send_keys("oi5D9oX4:")
+        password_field.send_keys(password)
         password_field.send_keys(Keys.RETURN)
         time.sleep(1)
 
