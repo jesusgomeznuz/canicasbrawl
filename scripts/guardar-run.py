@@ -14,7 +14,7 @@ def guardar_run():
     print(f"Carpeta creada: {new_folder_path}")
 
     # Paso 2: Buscar el video de run más reciente en "C:\Users\LENOVO\HowToMakeAVideoGame\HowToMakeAVideoGame\Recordings"
-    recordings_path = r"D:\canicasbrawl\CanicasBrawl\Recordings"
+    recordings_path = r"C:\Users\LENOVO\HowToMakeAVideoGame\HowToMakeAVideoGame\Recordings"
     video_files = glob(os.path.join(recordings_path, "Movie_*.mp4"))
     latest_video = max(video_files, key=os.path.getctime)
     print(f"Video más reciente encontrado: {latest_video}")
@@ -31,13 +31,13 @@ def guardar_run():
         print(f"Archivo eliminado: {winner_log_script_path}")
 
     # Paso 5: Copiar el archivo winner_log.csv a la nueva subcarpeta y a "C:\Users\LENOVO\Documents\canicasbrawl\scripts"
-    winner_log_source_path = r"C:\Users\LENOVO\AppData\LocalLow\CanicasBrawl\CanicasBrawl\winner_log.csv"
+    winner_log_source_path = r"C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame\winner_log.csv"
     shutil.copy(winner_log_source_path, new_folder_path)
     shutil.copy(winner_log_source_path, scripts_path)
     print(f"Archivo winner_log.csv copiado a: {new_folder_path} y {scripts_path}")
     
     # Copiar el archivo dual_winner_log.csv a la nueva subcarpeta y a "scripts"
-    dual_winner_log_source_path = r"C:\Users\LENOVO\AppData\LocalLow\CanicasBrawl\CanicasBrawl\dual_winner_log.csv"
+    dual_winner_log_source_path = r"C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame\dual_winner_log.csv"
     if os.path.exists(dual_winner_log_source_path):
         shutil.copy(dual_winner_log_source_path, new_folder_path)
         shutil.copy(dual_winner_log_source_path, scripts_path)

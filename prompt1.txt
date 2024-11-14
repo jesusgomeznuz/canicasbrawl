@@ -1,71 +1,71 @@
 Hola! Hago un juego llamado Canicas Brawl que consta de asignarle jugadores a canicas, que compiten en una carrera, y siempre que una canica va a la cabeza, utilizo el modelo de voz del personaje asignado para cantar una canción con AI. Es decir, las canicas canta una cierta canción, y siempre canta el personaje que va a la cabeza. Esto lo logro con Unity, generando un archivo .csv que lleva el registro de cambio de lider para ayudarme a editar el audio, y también tengo una archivo .csv que me da el tiempo total que cada canica cantó para cambiar las posiciones con respecto a lo que estoy buscando. 
 
-En esta ocasión lo que quiero hacer es una carrera vs (1vs1), en donde tendré 9 canicas compitiendo, pero sólo habrá dos personajes, habrán 5 de un personaje, y 4 del otro. Pero quiero sustituir las canicas consiguiendo lo siguiente:
+En esta ocasión lo que quiero hacer es una carrera vs (1vs1), en donde tendré 8 canicas compitiendo, quiero sustituir las canicas consiguiendo lo siguiente:
 
 1. Que el tiempo total de canto sea aproximadamente igual. (Prioridad alta)
 2. Que gane la canica que canta menos tiempo. (Prioridad alta)
-3. Que la relación de canicas sea 5:4. (Prioridad alta)
+3. Que la relación de canicas sea 4:4. (Prioridad alta)
 4. Que se trate de maximiar los cambios de líder para que ambas canicas no solo canten la misma cantidad de tiempo, sino que constatemente cambien de cantante. (Prioridad baja)
 
-Te  comparto las posiciones actuales, mis listas de cambio de lider, y tiempo total de canto de cada tabla. Es importante que notes que hay 9 canicas, y todas tienen asignados a un jugador, y tú tienes que decirme qué canicas debo sustituir por los jugadores originales para conseguir este efecto 1vs1.
-
+Te  comparto las posiciones actuales, mis listas de cambio de lider, y tiempo total de canto de cada tabla. Es importante que notes que hay 8 canicas, y todas tienen asignados a un jugador, y tú tienes que decirme qué canicas debo sustituir por los jugadores originales para conseguir este efecto 1vs1.
 
 PS C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame> python duplicates.py
 Tabla 1 (original sin duplicados):
             Time   Winner   Nickname
-0   00:00:00:000  Player7       Rick
-2   00:00:03:033  Player9     Steven
-4   00:00:03:200  Player3      Quico
-6   00:00:06:000  Player5     Vegeta
-8   00:00:06:033  Player3      Quico
-10  00:00:06:100  Player4      Shrek
-12  00:00:06:200  Player5     Vegeta
-14  00:00:06:900  Player8      Rigby
-16  00:00:07:167  Player4      Shrek
-18  00:00:09:033  Player7       Rick
-20  00:00:09:100  Player6      Peter
-22  00:00:09:200  Player7       Rick
-24  00:00:09:867  Player9     Steven
-26  00:00:16:567  Player7       Rick
-28  00:00:16:900  Player9     Steven
-30  00:00:18:933  Player6      Peter
-32  00:00:19:267  Player7       Rick
-34  00:00:19:567  Player6      Peter
-36  00:00:20:433  Player7       Rick
-38  00:00:20:633  Player6      Peter
-40  00:00:20:900  Player9     Steven
-42  00:00:21:267  Player6      Peter
-44  00:00:23:967  Player7       Rick
-46  00:00:24:067  Player9     Steven
-48  00:00:24:333  Player7       Rick
-50  00:00:24:533  Player6      Peter
-52  00:00:24:867  Player9     Steven
-54  00:00:27:233  Player6      Peter
-56  00:00:30:033  Player3      Quico
-58  00:00:30:067  Player9     Steven
-60  00:00:30:100  Player3      Quico
-62  00:00:30:333  Player9     Steven
-64  00:00:31:167  Player2    Phineas
-66  00:00:33:067  Player7       Rick
-68  00:00:33:167  Player3      Quico
-70  00:00:33:533  Player1  ReyHelado
-72  00:00:43:000  Player6      Peter
-74  00:00:43:433  Player1  ReyHelado
-76  00:00:43:467  Player6      Peter
-78  00:00:48:700  Player7       Rick
-80  00:00:49:233  Player6      Peter
-82  00:00:49:967  Player7       Rick
+0   00:00:00:000  Player5      Ben10
+2   00:00:03:033  Player4  marceline
+4   00:00:03:333  Player8     Minion
+6   00:00:06:033  Player7     Darwin
+8   00:00:06:100  Player2       Rayo
+10  00:00:06:200  Player7     Darwin
+12  00:00:06:667  Player6        BMO
+14  00:00:07:333  Player2       Rayo
+16  00:00:07:433  Player6        BMO
+18  00:00:07:467  Player2       Rayo
+20  00:00:09:033  Player7     Darwin
+22  00:00:09:067  Player1       Bart
+24  00:00:09:200  Player8     Minion
+26  00:00:09:267  Player4  marceline
+28  00:00:12:300  Player8     Minion
+30  00:00:12:367  Player4  marceline
+32  00:00:13:900  Player8     Minion
+34  00:00:14:033  Player4  marceline
+36  00:00:19:300  Player8     Minion
+38  00:00:19:533  Player4  marceline
+40  00:00:20:133  Player7     Darwin
+42  00:00:21:533  Player8     Minion
+44  00:00:21:600  Player7     Darwin
+46  00:00:24:267  Player5      Ben10
+48  00:00:24:533  Player8     Minion
+50  00:00:24:700  Player4  marceline
+52  00:00:25:600  Player5      Ben10
+54  00:00:27:100  Player8     Minion
+56  00:00:27:700  Player2       Rayo
+58  00:00:30:033  Player7     Darwin
+60  00:00:30:867  Player5      Ben10
+62  00:00:31:600  Player7     Darwin
+64  00:00:31:633  Player5      Ben10
+66  00:00:33:033  Player8     Minion
+68  00:00:33:300  Player1       Bart
+70  00:00:33:333  Player6        BMO
+72  00:00:33:433  Player1       Bart
+74  00:00:36:767  Player7     Darwin
+76  00:00:37:000  Player1       Bart
+78  00:00:44:600  Player7     Darwin
+80  00:00:49:300  Player8     Minion
+82  00:00:50:133  Player7     Darwin
 
 Tabla 2 (tiempos totales por jugador):
     Nickname    Time
-0       Rick   8.766
-1     Steven  12.766
-2      Quico   3.500
-3     Vegeta   0.733
-4      Shrek   1.966
-5      Rigby   0.267
-6      Peter  13.801
-7    Phineas   1.900
-8  ReyHelado   9.501
+0      Ben10   6.932
+1  marceline  11.633
+2     Minion   5.134
+3     Darwin  13.502
+4       Rayo   4.099
+5        BMO   0.800
+6       Bart  11.100
 
-Competirá RIgby y Naruto, y ganará Rigby. también asigna las canicas que no salgan.
+Duplicados eliminados y archivos guardados como 'winner_log_clean.csv' y 'winner_times.csv'
+PS C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame>
+
+Competirá DulcePrincesa y Quico, y ganará DulcePrincesa, también asigna las canicas que no salgan.
