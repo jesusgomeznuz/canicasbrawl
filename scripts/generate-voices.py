@@ -1,17 +1,20 @@
 import os
 import csv
 import time
+import shutil
+import subprocess
 import pandas as pd
 from glob import glob
+from pydub import AudioSegment
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from pydub import AudioSegment
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from moviepy.editor import VideoFileClip, AudioFileClip
 
 log_canciones_path = r"C:\Users\LENOVO\Documents\canicasbrawl\scripts\log_canciones.csv"
 runs_directory = r"D:\canicasbrawl\Runs"
@@ -20,6 +23,32 @@ raw_production_folder = r"D:\canicasbrawl\raw production"
 download_dir = "C:/Users/LENOVO/Downloads/"
 email = os.environ.get('JAMMABLE_EMAIL')
 password = os.environ.get('JAMMABLE_PASSWORD')
+
+def time_to_ms(time_str):
+    h, m, s, ms = map(int, time_str.split(":"))
+    return (h * 3600 + m * 60 + s) * 1000 + ms
+
+def create_final_audio(winner_data, normalized_audio, output_path, instrumental_path):
+    instrumental_audio = AudioSegment.from_file(instrumental_path)
+    instrumental_audio = instrumental_audio.apply_gain(-5)
+    max_duration = instrumental_audio.duration_seconds * 1000
+    output_audio = AudioSegment.silent(duration=max_duration)
+
+    for i, row in winner_data.iterrows():
+        start_time = time_to_ms(row['Time'])
+        end_time = time_to_ms(winner_data.iloc[i + 1]['Time']) if i + 1 < len(winner_data) else max_duration
+        nickname = row['Nickname'].lower()
+
+        if nickname in normalized_audio:
+            player_segment = normalized_audio[nickname][start_time:end_time]
+            output_audio = output_audio.overlay(player_segment, position=start_time)
+
+    final_audio = instrumental_audio.overlay(output_audio)
+    final_audio_path = os.path.join(output_path, "final_output_with_instrumental.mp3")
+    final_audio.export(final_audio_path, format="mp3")
+    log_with_time(f"Audio final exportado en: {final_audio_path}")
+
+    return final_audio_path
 
 def log_with_time(message):
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {message}")
@@ -56,7 +85,7 @@ def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
 
             # Proceder con la búsqueda de run y asignación de personajes
             try:
-                run_folder, _, run_number = find_earliest_run_with_video(runs_directory, used_runs)
+                run_folder, mp4_file, run_number = find_earliest_run_with_video(runs_directory, used_runs)
             except FileNotFoundError:
                 log_with_time("No se encontraron más runs disponibles.")
                 break
@@ -89,9 +118,18 @@ def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
                 personajes = ['N/A']
 
             personajes = ','.join(sorted([p.lower() for p in personajes]))
-            canciones_personajes.append((nombre_cancion, personajes))
+            canciones_personajes.append((
+                nombre_cancion,
+                personajes,
+                run_folder,
+                mp4_file,
+                run_number,
+                new_video_name,
+                new_video_path
+            ))
 
     return canciones_personajes
+
 
 def convert_audio_with_selenium(links_nicknames, song_name):
     service = Service('C:/chromedriver-win64/chromedriver.exe')
@@ -301,7 +339,7 @@ else:
     canciones_personajes = obtener_canciones_y_personajes(log_canciones_path, runs_directory, used_runs)
 
     # Procesar cada canción y sus personajes
-    for cancion, personajes in canciones_personajes:
+    for cancion, personajes, run_folder, mp4_file, run_number, new_video_name, new_video_path in canciones_personajes:
         print(f"Canción a producir: {cancion}")
         print(f"Personajes: {personajes}")
         print()
@@ -340,3 +378,74 @@ else:
             # Realizar la conversión
             convert_audio_with_selenium(links_nicknames, cancion)
             log_with_time(f"Conversión finalizada para {cancion}")
+
+        # **Aquí comienza la integración de la generación de videos**
+        # Verificar si los archivos de voz e instrumental están presentes
+        voz_path_mp3 = os.path.join(folder_path, "voz.mp3")
+        voz_path_wav = os.path.join(folder_path, "voz.wav")
+        instrumental_path = os.path.join(folder_path, "instrumental.mp3")
+        if os.path.exists(voz_path_mp3) or os.path.exists(voz_path_wav):
+            if os.path.exists(instrumental_path):
+                log_with_time(f"Todos los archivos necesarios para {cancion} están presentes para la generación del video.")
+            else:
+                log_with_time(f"Falta el archivo instrumental para {cancion}. Se omite la generación del video.")
+                continue
+        else:
+            log_with_time(f"Falta el archivo de voz para {cancion}. Se omite la generación del video.")
+            continue
+
+        # Cargar los datos de winner_log.csv
+        winner_log_path = os.path.join(run_folder, "winner_log.csv")
+        if not os.path.exists(winner_log_path):
+            raise FileNotFoundError(f"El archivo {winner_log_path} no existe.")
+        winner_data = pd.read_csv(winner_log_path)
+
+        # Preparar las rutas de los archivos de audio de los jugadores
+        player_audio_paths = {
+            nickname.lower(): (os.path.join(folder_path, f"{nickname.lower()}.mp3") if os.path.exists(os.path.join(folder_path, f"{nickname.lower()}.mp3")) else os.path.join(folder_path, f"{nickname.lower()}.wav"))
+            for nickname in winner_data['Nickname'].unique()
+        }
+
+        # Cargar los archivos de audio de los jugadores
+        players_audio = {player: AudioSegment.from_file(path) for player, path in player_audio_paths.items() if os.path.exists(path)}
+
+        # Normalizar los niveles de audio
+        target_dBFS = -20.0
+        normalized_audio = {}
+        for player, audio in players_audio.items():
+            change_in_dBFS = target_dBFS - audio.dBFS
+            normalized_audio[player] = audio.apply_gain(change_in_dBFS)
+
+        # Crear el audio final combinando las voces normalizadas y el instrumental
+        final_audio_path = create_final_audio(winner_data, normalized_audio, folder_path, instrumental_path)
+
+        # Obtener la ruta del video correspondiente al run
+        video_path = mp4_file  # Asegúrate de que mp4_file está definido en este contexto
+        if not os.path.exists(video_path):
+            raise FileNotFoundError(f"El archivo {video_path} no existe.")
+        log_with_time(f"Archivo de video encontrado: {video_path}")
+
+        # Cargar el video y el audio final
+        video_clip = VideoFileClip(video_path)
+        audio_clip = AudioFileClip(final_audio_path)
+
+        # Ajustar la duración del video al audio
+        video_clip = video_clip.subclip(0, audio_clip.duration)
+
+        # Combinar el audio con el video
+        final_video = video_clip.set_audio(audio_clip)
+
+        # Exportar el video final
+        final_video_output_path = os.path.join(folder_path, "final_video_with_audio.mp4")
+
+        # Verificar si el video final ya existe
+        if os.path.exists(final_video_output_path):
+            log_with_time(f"El video final {final_video_output_path} ya existe. Se omite la exportación.")
+        else:
+            final_video.write_videofile(final_video_output_path, codec="libx264", audio_codec="aac")
+            log_with_time(f"Video final con audio exportado en: {final_video_output_path}")
+
+        # Mover el video final a la carpeta de raw production
+        os.makedirs(raw_production_folder, exist_ok=True)
+        shutil.move(final_video_output_path, new_video_path)
+        log_with_time(f"Video movido a: {new_video_path}")
