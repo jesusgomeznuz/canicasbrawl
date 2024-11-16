@@ -21,11 +21,6 @@ download_dir = "C:/Users/LENOVO/Downloads/"
 email = os.environ.get('JAMMABLE_EMAIL')
 password = os.environ.get('JAMMABLE_PASSWORD')
 
-def cancion_ya_producida(song_name, raw_production_folder):
-    # Revisa si existen archivos relacionados con la canción en la carpeta 'raw production'
-    production_path = os.path.join(raw_production_folder, song_name)
-    return os.path.exists(production_path) and len(os.listdir(production_path)) > 0
-
 def log_with_time(message):
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {message}")
 
@@ -47,6 +42,10 @@ def find_earliest_run_with_video(directory, used_runs):
                 return subfolder, mp4_files[0], run_number
     raise FileNotFoundError("No se encontraron subcarpetas con archivos .mp4")
 
+def sanitize_string(s):
+    """Convierte una cadena a minúsculas y elimina espacios."""
+    return s.lower().replace(" ", "")
+
 def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
     canciones_personajes = []
 
@@ -55,15 +54,27 @@ def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
         for row in reader:
             nombre_cancion = row['nombre']
 
-            # Verificar si la canción ya está producida en la carpeta 'raw production'
-            if cancion_ya_producida(nombre_cancion, raw_production_folder):
-                log_with_time(f"La canción '{nombre_cancion}' ya ha sido producida. Saltando.")
+            # Proceder con la búsqueda de run y asignación de personajes
+            try:
+                run_folder, _, run_number = find_earliest_run_with_video(runs_directory, used_runs)
+            except FileNotFoundError:
+                log_with_time("No se encontraron más runs disponibles.")
+                break
+
+            # Calcular new_video_name y new_video_path como en generate-videos.py
+            video_number = run_number + 25
+            new_video_name = f"Video{video_number} - Run {run_number} - {nombre_cancion}.mp4"
+            new_video_path = os.path.join(raw_production_folder, new_video_name)
+
+            # Verificar si el video ya existe en raw production
+            if os.path.exists(new_video_path):
+                log_with_time(f"El video '{new_video_name}' ya se encuentra en raw production.")
+                used_runs.add(run_number)  # Asegurarse de no reutilizar el run
                 continue
 
-            # Proceder con la búsqueda de run y asignación de personajes
-            run_folder, _, run_number = find_earliest_run_with_video(runs_directory, used_runs)
             used_runs.add(run_number)
 
+            # Proceder con el resto del código
             personajes = []
             winner_log_path = os.path.join(run_folder, "winner_log.csv")
             if os.path.exists(winner_log_path):
@@ -85,6 +96,7 @@ def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
 def convert_audio_with_selenium(links_nicknames, song_name):
     service = Service('C:/chromedriver-win64/chromedriver.exe')
     chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ejecuta en modo headless
     chrome_options.add_argument("--start-maximized")
     driver = webdriver.Chrome(service=service, options=chrome_options)
     
@@ -165,9 +177,9 @@ def convert_audio_with_selenium(links_nicknames, song_name):
         driver.get("https://www.jammable.com/history")
         time.sleep(1)
 
-        while "PENDING" in driver.page_source.upper() or "CONVERTING" in driver.page_source.upper() or "EXTRACTING" in driver.page_source.upper():
+        while "PENDING" in driver.page_source.upper() or "CONVERTING" in driver.page_source.upper() or "EXTRACTING" in driver.page_source.upper() or "MIXING" in driver.page_source.upper():
             print("Faltan conversiones por finalizar.")
-            time.sleep(10)  # Esperar 10 segundos antes de refrescar
+            time.sleep(15)  # Esperar 15 segundos antes de refrescar
             driver.refresh()
         
         print("Todas las conversiones han finalizado.")
@@ -199,7 +211,7 @@ def convert_audio_with_selenium(links_nicknames, song_name):
     
             try:
                 # Hacer clic en el botón de "Download" para desplegar la lista
-                download_button = WebDriverWait(driver, 10).until(
+                download_button = WebDriverWait(driver, 120).until(
                     EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'tw-inline-flex') and contains(text(), 'Download')]"))
                 )
                 download_button.click()
@@ -219,33 +231,46 @@ def convert_audio_with_selenium(links_nicknames, song_name):
                 print(f"No se pudo hacer clic en 'Download Combined' para {nickname}: Elemento no encontrado en el DOM.")
                 continue
 
-            # Buscar el archivo .mp3 descargado que contenga una palabra del `nickname`
-            for file in os.listdir(download_dir):
-                if file.endswith(".mp3") and (nickname.split()[0].lower() in file.lower() or (len(nickname.split()) > 1 and nickname.split()[1].lower() in file.lower())):
-                    downloaded_file = os.path.join(download_dir, file)
-                    break
-            else:
-                print(f"No se encontró el archivo descargado para {nickname}.")
-                downloaded_file = None
+            # Esperar brevemente para permitir que la descarga inicie
+            time.sleep(2)
+
+            # Buscar el archivo descargado en la carpeta de descargas
+            downloaded_file = None
+            files_in_download = [f for f in os.listdir(download_dir) if f.endswith(".mp3")]
+            if not files_in_download:
+                print(f"No se encontró ningún archivo .mp3 en la carpeta de descargas para {nickname}.")
+                continue
+
+            # Identificar el archivo más reciente
+            downloaded_file = max(
+                [os.path.join(download_dir, f) for f in files_in_download],
+                key=os.path.getctime
+            )
+
+            # Renombrar el archivo descargado al formato "[nickname] - [song_name].mp3"
+            new_filename = f"{nickname} - {song_name}.mp3"
+            new_file_path = os.path.join(download_dir, new_filename)
+            try:
+                os.rename(downloaded_file, new_file_path)
+                print(f"Archivo descargado renombrado a: {new_filename}")
+            except Exception as e:
+                print(f"Error al renombrar el archivo de {nickname}: {e}")
+                continue
 
             # Convertir el archivo .mp3 a .wav y moverlo a la carpeta de destino
-            if downloaded_file:
-                try:
-                    audio = AudioSegment.from_mp3(downloaded_file)
-                    audio.export(output_path, format="wav")
-                    os.remove(downloaded_file)
-                    print(f"El archivo de {nickname} se ha convertido y movido a: {output_path}")
-                except Exception as e:
-                    print(f"Error al convertir o mover el archivo de {nickname}: {e}")
-    
+            try:
+                audio = AudioSegment.from_mp3(new_file_path)
+                audio.export(output_path, format="wav")
+                os.remove(new_file_path)
+                print(f"El archivo de {nickname} se ha convertido y movido a: {output_path}")
+            except Exception as e:
+                print(f"Error al convertir o mover el archivo de {nickname}: {e}")
+                continue
+
             driver.get("https://www.jammable.com/history")
             time.sleep(1)
     finally:
         driver.quit()
-
-def sanitize_string(s):
-    """Convierte una cadena a minúsculas y elimina espacios."""
-    return s.lower().replace(" ", "")
 
 def check_existing_conversion(driver, filename):
     """Verifica si una conversión con el nombre del archivo ya existe en Jammable."""
@@ -283,26 +308,35 @@ else:
 
         personajes_list = personajes.split(',')
 
-        # Verificar si todos los archivos ya están presentes
+        # Verificar archivos existentes y crear lista de faltantes
         folder_path = f"D:/canicasbrawl/canciones/{cancion}/"
-        all_files_present = True
-        for personaje in personajes_list:
-            wav_path = os.path.join(folder_path, f"{personaje}.wav")
-            mp3_path = os.path.join(folder_path, f"{personaje}.mp3")
-            if not os.path.exists(wav_path) and not os.path.exists(mp3_path):
-                all_files_present = False
-                break
+        missing_personajes = []
 
-        if all_files_present:
+        for personaje in personajes_list:
+            mp3_path = os.path.join(folder_path, f"{personaje}.mp3")
+            wav_path = os.path.join(folder_path, f"{personaje}.wav")
+            if os.path.exists(mp3_path):
+                log_with_time(f"El archivo {mp3_path} ya existe.")
+            elif os.path.exists(wav_path):
+                log_with_time(f"El archivo {wav_path} ya existe.")
+            else:
+                log_with_time(f"El archivo para {personaje} no existe y será convertido.")
+                missing_personajes.append(personaje)
+
+        if not missing_personajes:
             log_with_time(f"Todos los archivos necesarios para {cancion} están presentes.")
         else:
-            log_with_time(f"Comenzando la conversión para {cancion}...")
+            log_with_time(f"Comenzando la conversión para {cancion} para los personajes faltantes...")
+            # Proceder con la conversión
 
             # Leer los nombres y URLs de jammable.csv
             df = pd.read_csv(voice_URLS)
-            selected_characters = df[df['nickname'].isin(personajes_list)]
-            links_nicknames = [(row['URL'], row['nickname'], sanitize_string(f"{cancion}-{row['nickname']}")) for _, row in selected_characters.iterrows()]
-        
+            selected_characters = df[df['nickname'].isin(missing_personajes)]
+            links_nicknames = [
+                (row['URL'], row['nickname'], sanitize_string(f"{cancion}-{row['nickname']}"))
+                for _, row in selected_characters.iterrows()
+            ]
+
             # Realizar la conversión
             convert_audio_with_selenium(links_nicknames, cancion)
             log_with_time(f"Conversión finalizada para {cancion}")
