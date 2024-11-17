@@ -33,7 +33,7 @@ The core of the project is the main script, `generate-videos.py`, which connects
      - Normalizing audio levels across all character tracks.
      - Synchronizing the audio with the race video.
    - Ensures the final video is stored in the raw production folder for further distribution.
-   - **[View Process Diagram](link-to-generate-videos-diagram)**
+   - **[View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)**
 
 This process is supported by two fundamental subprocesses:
 
