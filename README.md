@@ -48,7 +48,7 @@ This process is supported by two fundamental subprocesses:
   - The run video.
   - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
 - **Importance**: This script sets up the required files for further analysis and video generation.
-- **View Process Diagram**: [Guardar Run Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
+- **View Process Diagram**: [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 2. **`voice-removal.py`**:
    - Takes as input the name, YouTube link, and start time of a song to:
