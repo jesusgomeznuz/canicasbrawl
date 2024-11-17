@@ -161,20 +161,69 @@ This section explores the unique workflows of these scripts, showing:
 ## Interactive Example: AI-Generated 1vs1 Races
 
 ### Overview
-In this section, you’ll explore how AI is used to optimize **1vs1 races** for **CanicasBrawl**. This example walks through the workflow step by step, including how the AI interacts with the process and the visual differences in the final videos.
+This section demonstrates how AI is used to optimize **1vs1 races** in **CanicasBrawl**. The example walks through:
+1. The initial setup of the race.
+2. Interaction with AI to refine the marble positions.
+3. Execution of the `generate-videos-jammable.py` script with the new setup.
+4. A final visual comparison between the **Original Random Setup** and the **AI-Optimized Setup**.
 
-### Process Flow
-1. **Interaction with AI (ChatGPT)**:
-   - Define parameters for the race setup.
-2. **Script Execution**:
-   - Generate the race video using the optimized parameters.
-3. **Visual Comparison**:
-   - Original Random Setup vs. AI-Optimized Setup.
+---
 
-### Demo Videos
-- [ChatGPT Interaction Preview](#)
-- [Original Random Setup](#)
-- [AI-Optimized Setup](#)
+### Initial Setup
+Here’s a snapshot of the initial race setup and the corresponding data from `winner_log.csv`:
+
+#### Race Setup Photo
+![Initial Setup](path/to/initial_setup_photo.png)
+
+#### Winner Log (`winner_log.csv`)
+```csv
+Nickname,Time
+Player1,15
+Player2,20
+Player3,30
+...
+
+### Interaction with AI
+To optimize the race, **ChatGPT** was used to recommend a new arrangement for the marbles based on the times in `winner_log.csv`.
+
+#### ChatGPT Interaction
+You can view the full interaction [here](link/to/chatgpt_interaction.md).
+
+#### Key Result
+ChatGPT suggested the following arrangement:
+```text
+Marble Positions:
+1. Player3
+2. Player2
+3. Player1
+...
+
+---
+
+#### New Setup Photo
+![AI-Optimized Setup](path/to/ai_optimized_setup_photo.png)
+
+---
+
+### Script Execution
+Using the `generate-videos-jammable.py` script, the voices were generated for the new setup.
+
+#### Demo Video: Generating Voices
+[Watch Voice Generation in Action](path/to/voice_generation_demo.mp4)
+
+---
+
+### Final Comparison
+Below is a side-by-side comparison of the **Original Random Setup** vs. the **AI-Optimized Setup**, showcasing how the changes impacted the final video:
+
+#### Comparison Video
+[Watch Side-by-Side Comparison](path/to/comparison_video.mp4)
+
+---
+
+### Key Takeaways
+- The AI-optimized setup resulted in a more balanced and visually engaging race.
+- This example highlights how AI can be used not only for optimization but also to demonstrate the flexibility and scalability of the **CanicasBrawl** workflow.
 
 ---
 
