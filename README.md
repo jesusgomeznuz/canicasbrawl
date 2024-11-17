@@ -225,7 +225,6 @@ Table 2 (total times per player):
 5     Steven   1.133
 6        BMO   3.701
 7      Quico   5.300
-...
 ```
 
 ### Interaction with AI
@@ -236,12 +235,26 @@ You can view the full interaction [here](link/to/chatgpt_interaction.md).
 
 #### Key Result
 ChatGPT suggested the following arrangement:
+
+##### Marceline:
+- **Player1**: Finn - 16.899 s  
+- **Player2**: BMO - 3.701 s  
+- **Player3**: Steven - 1.133 s  
+- **Player5**: Mordecai - 3.699 s  
+
+**Total Time for Marceline:**
+text
+16.899 + 3.701 + 1.133 + 3.699 = 25.432 seconds
+
+##### Dipper:
+- **Player4**: Marceline - 8.699 s  
+- **Player6**: Quico - 5.300 s  
+- **Player7**: Naruto - 1.834 s  
+- **Player8**: Ben10 - 11.935 s  
+
+**Total Time for Dipper:**
 ```text
-Marble Positions:
-1. Player3
-2. Player2
-3. Player1
-...
+8.699 + 5.300 + 1.834 + 11.935 = 27.768 seconds
 ```
 ---
 
