@@ -63,6 +63,7 @@ This process is supported by two fundamental subprocesses:
   - `voz.mp3` (the vocal track).
   - `[song_name].mp3` (the original 60-second segment).
 - **Purpose**: This script ensures the `canciones` folder is filled with the required audio files of songs. It prepares audio files for synchronization with run videos while maintaining a clean backup system.
+- [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/voice_removal.png)
 
 These three scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
 
