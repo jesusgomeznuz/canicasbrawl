@@ -175,12 +175,56 @@ Here’s a snapshot of the initial race setup and the corresponding data from `w
 #### Race Setup Photo
 ![Initial Setup](path/to/initial_setup_photo.png)
 
-#### Winner Log (`winner_log.csv`)
+#### Winner Log (`winner_log.csv`) and Winner List (`winner_list.csv`)
 ```csv
-Nickname,Time
-Player1,15
-Player2,20
-Player3,30
+VideoGame> python duplicates.py
+Table 1 (original without duplicates):
+            Time   Winner   Nickname
+0   00:00:00:000  Player5   Mordecai
+2   00:00:03:033  Player7     Naruto
+4   00:00:03:333  Player8      Ben10
+6   00:00:04:000  Player4  marceline
+8   00:00:04:133  Player8      Ben10
+10  00:00:06:033  Player7     Naruto
+12  00:00:06:067  Player1       Finn
+14  00:00:06:200  Player3     Steven
+16  00:00:07:000  Player1       Finn
+18  00:00:09:000  Player2        BMO
+20  00:00:09:067  Player4  marceline
+22  00:00:09:133  Player2        BMO
+24  00:00:09:200  Player8      Ben10
+26  00:00:13:133  Player4  marceline
+28  00:00:15:700  Player8      Ben10
+30  00:00:17:267  Player4  marceline
+32  00:00:21:167  Player8      Ben10
+34  00:00:23:967  Player5   Mordecai
+36  00:00:24:033  Player8      Ben10
+38  00:00:24:667  Player5   Mordecai
+40  00:00:24:867  Player1       Finn
+42  00:00:26:933  Player8      Ben10
+44  00:00:26:967  Player1       Finn
+46  00:00:27:600  Player8      Ben10
+48  00:00:28:000  Player4  marceline
+50  00:00:30:033  Player7     Naruto
+52  00:00:30:800  Player5   Mordecai
+54  00:00:31:200  Player7     Naruto
+56  00:00:33:033  Player1       Finn
+58  00:00:33:400  Player2        BMO
+60  00:00:36:967  Player1       Finn
+62  00:00:48:667  Player6      Quico
+64  00:00:53:967  Player3     Steven
+66  00:00:54:300  Player7     Naruto
+
+Table 2 (total times per player):
+    Nickname    Time
+0   Mordecai   3.699
+1     Naruto   1.834
+2      Ben10  11.935
+3  marceline   8.699
+4       Finn  16.899
+5     Steven   1.133
+6        BMO   3.701
+7      Quico   5.300
 ...
 ```
 
