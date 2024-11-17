@@ -39,16 +39,18 @@ The core of the project is the main script, `generate-videos.py`, which connects
 This process is supported by two fundamental subprocesses:
 
 ### 1. `guardar_run.py`
-- **Purpose**: Creates consecutive `run_folder` and moves the most recent recording (from Unity) into it.
+- **Purpose**: Prepares the `run_folder` by organizing the run video (`Movie_*.mp4`) and the `winner_log.csv` file for video generation. Additionally, it saves `results.csv` and `winner.csv` to maintain a historical record of lead times and winners in `historico_runs.xlsx`.
 - **Automates the process of**:
   - Creating the `run_folder` and organizing its contents.
-  - Moving the most recent recording (run video) to the folder.
-  - Moving `winner_log.csv` from the source directory to the `run_folder`.
-  - Ensuring all necessary logs (`winner_log.csv`, `results.csv`, and `winner.csv`) are correctly organized for further processing.
-- **Output**: A structured folder containing:
-  - The run video.
-  - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
-- **Importance**: This script sets up the required files for further analysis and video generation.
+  - Moving the most recent recording (`Movie_*.mp4`) to the folder for video generation.
+  - Moving `winner_log.csv` to the `run_folder` as the key file required for generating the final video.
+  - Saving `results.csv` and `winner.csv` in the `run_folder` to maintain a historical record of lead times and winners in `historico_runs.xlsx`.
+- **Output**: A structured `run_folder` containing:
+  - The run video (`Movie_*.mp4`).
+  - `winner_log.csv` (required for video generation).
+  - `results.csv` (for lead times).
+  - `winner.csv` (for historical records).
+- **Purpose**: This script organizes essential files needed for video generation and maintains a history of runs for analysis.
 - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 2. **`voice-removal.py`**:
