@@ -130,15 +130,17 @@ This section explores the unique workflows of these scripts, showing:
 
 #### 3. **Applio Workflow**  
 **Script**: `generate-videos-applio.py`  
-- **Use Case**: Simplifies generating audio for one character at a time.
+- **Use Case**: Suitable for generating all voices locally, especially when budget constraints are a priority.
 - **How It Works**:
-  - Processes a single voice, making it ideal for quick edits or single-character content.
-  - Synchronizes the audio and video for the character's part.
+  - Processes voices locally, either for all characters or specific ones, with the same workflow as other scripts.
+  - Allows full automation using Selenium for integration into local setups.
 - **Why Use It?**:
-  - Lightweight and fast for specific needs.
-  - Excellent for quick edits or isolated scenarios.
+  - Free and completely local, making it accessible without requiring paid subscriptions or external servers.
+  - Useful for prototyping or when hardware resources are limited.
 - **Challenges**:
-  - Not practical for multi-character tasks.
+  - Voice quality is lower compared to Jammable and AICoverGen.
+  - Processing speed depends on local hardware; slower on less powerful systems.
+  - Often requires post-processing (e.g., cleaning voices with AICoverGen) for production-quality results.
 - **Resources**:
   - [View Process Diagram](#)
   - [Watch Workflow in Action](#)
@@ -148,13 +150,11 @@ This section explores the unique workflows of these scripts, showing:
 
 ### Summary Table
 
-| Workflow         | Best Use Case                  | Advantages                                    | Disadvantages                                  |
-|-------------------|--------------------------------|-----------------------------------------------|-----------------------------------------------|
-| **Jammable**      | Full song for all characters  | Efficient for multi-voice processing          | Requires pre-processed files, resource-heavy  |
-| **AI Cover**      | Refining specific voices      | Targeted corrections, faster for small changes| Limited to a few voices, manual adjustments   |
-| **Applio**        | Single-character adjustments  | Quick and simple for one character            | Inefficient for multiple characters           |
-
-
+| Workflow         | Best Use Case                           | Advantages                                     | Disadvantages                                   |
+|-------------------|-----------------------------------------|-----------------------------------------------|-----------------------------------------------|
+| **Jammable**      | Full song for all characters quickly    | Fast, precise, and reliable for prototyping   | Requires third-party service; subscription-based; quality not as polished as AICoverGen |
+| **AICoverGen**    | Refining or updating specific voices    | Produces the best audio quality               | Slower than Jammable; requires high resources or paid Google Colab subscription         |
+| **Applio**        | Generating all voices locally           | Free and fully local; straightforward automation | Slower and lower quality; depends on hardware; may need post-processing                |
 
 ---
 
