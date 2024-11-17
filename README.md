@@ -38,17 +38,17 @@ The core of the project is the main script, `generate-videos.py`, which connects
 This process is supported by two fundamental subprocesses:
 
 ### 1. `guardar_run.py`
-- **Purpose**: Creates the `run_folder` and organizes essential files for each run.
+- **Purpose**: Creates consecutive `run_folder` and moves the most recent recording (from Unity) into it.
 - **Process**:
   1. **`run_folder` Creation**:
      - Moves the most recent recording (run video) to the folder.
   2. **Log Management**:
      - Moves `winner_log.csv` from the source directory to the `run_folder`.
-     - Ensures the necessary logs are correctly organized for further processing.
+     - Ensures all necessary logs are correctly organized for further processing.
 - **Output**: A structured folder containing:
   - The run video.
-  - The `winner_log.csv` file for further analysis.
-- **Significance**: This script is crucial for structuring the foundation of the final video and run data.
+  - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
+- **Importance**: This script sets up the required files for further analysis and video generation.
 - **[View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)**
 
 2. **`voice-removal.py`**:
