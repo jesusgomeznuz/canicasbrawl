@@ -39,17 +39,15 @@ This process is supported by two fundamental subprocesses:
 
 ### 1. `guardar_run.py`
 - **Purpose**: Creates consecutive `run_folder` and moves the most recent recording (from Unity) into it.
-- **Process**:
-  1. **`run_folder` Creation**:
-     - Moves the most recent recording (run video) to the folder.
-  2. **Log Management**:
-     - Moves `winner_log.csv` from the source directory to the `run_folder`.
-     - Ensures all necessary logs are correctly organized for further processing.
-- **Output**: A structured folder containing:
+- **Automates the process of**:
+  - Creating the `run_folder` and organizing its contents.
+  - Moving the most recent recording (run video) to the folder.
+  - Moving `winner_log.csv` from the source directory to the `run_folder`.
+  - Ensuring all necessary logs (`winner_log.csv`, `results.csv`, and `winner.csv`) are correctly organized for further processing.
+- **Output**:
   - The run video.
   - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
-- **Importance**: This script sets up the required files for further analysis and video generation.
-- **[View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)**
+- **View Process Diagram**: [Guardar Run Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 2. **`voice-removal.py`**:
    - Takes as input the name, YouTube link, and start time of a song to:
