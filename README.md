@@ -26,8 +26,6 @@ The core of the project is the main script, `generate-videos.py`, which connects
 
 1. **`generate-videos.py`**:
    - Combines race video (run_folder) and character audio to produce final CanicasBrawl videos.
-     - `winner_log.csv`: A log of the winner and run statistics.
-     - Run video: A video capture of the run itself.
    - Automates the process of:
      - Verifying if a video has already been produced.
      - Checking for missing character voice files.  
