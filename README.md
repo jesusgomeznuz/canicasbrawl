@@ -79,38 +79,70 @@ These three scripts (along with `generate-videos.py`) form **the backbone of the
 ## `generate-videos.py`: Comparison and Workflow
 
 ### Overview
-This section demonstrates the workflow of three different `generate-videos.py` implementations, highlighting their differences, advantages, and disadvantages. Each implementation includes a process diagram and a demo video to make the workflows clear and engaging.
+This section explores the three different implementations of the `generate-videos.py` script: `generate-videos-jammable.py`, `generate-videos-aicovergen.py`, and `generate-videos-applio.py`. Each implementation has unique strengths and trade-offs, making them suitable for specific use cases.
+
+For each implementation, you’ll find:
+- A **process diagram** illustrating the script’s workflow.
+- A **demo video** showing how the script generates a video.
+- An explanation of its **advantages**, **disadvantages**, and **recommended use cases**.
 
 ### Implementations
-1. **Centralized Fully-Automated Workflow**:
-   - **Diagram**: [View Process Diagram](#)
-   - **Demo Video**: [Watch Full Automation in Action](#)
-   - **Advantages**:
-     - Minimal manual intervention.
-     - Fully integrates audio and video processes.
-   - **Disadvantages**:
-     - Requires proper setup of pre-processed files.
-     - Higher resource demands.
 
-2. **Semi-Automated Workflow**:
-   - **Diagram**: [View Process Diagram](#)
-   - **Demo Video**: [Watch Semi-Automation in Action](#)
-   - **Advantages**:
-     - Balances automation and manual control.
-     - Easier to adapt for specific scenarios.
-   - **Disadvantages**:
-     - Requires more user interaction.
-     - Slower compared to the fully-automated workflow.
+#### 1. **Jammable Workflow (generate-videos-jammable.py)**
+- **Overview**: 
+  - This implementation is ideal for generating complete songs for all characters. It processes multiple voice files at once, ensuring consistency across the entire song.
+- **Use Case**: Use this when you need to generate audio for every character in a race.
+- **Diagram**: [View Process Diagram](#)
+- **Demo Video**: [Watch Jammable Workflow in Action](#)
+- **Advantages**:
+  - Handles multiple voices efficiently.
+  - Produces consistent results for full songs.
+  - Minimal manual intervention once configured.
+- **Disadvantages**:
+  - Requires significant pre-processing and file organization.
+  - May be resource-intensive for large-scale processing.
 
-3. **Manual Workflow**:
-   - **Diagram**: [View Process Diagram](#)
-   - **Demo Video**: [Watch Manual Workflow in Action](#)
-   - **Advantages**:
-     - Maximum control over each step.
-     - No dependency on complex scripts.
-   - **Disadvantages**:
-     - Time-intensive.
-     - Prone to human error.
+---
+
+#### 2. **AI Cover Workflow (generate-videos-aicovergen.py)**
+- **Overview**:
+  - This implementation is best suited for refining or correcting specific voices. It is useful when only a few characters need adjustments or updates.
+- **Use Case**: Use this to refine up to three character voices for an existing video setup.
+- **Diagram**: [View Process Diagram](#)
+- **Demo Video**: [Watch AI Cover Workflow in Action](#)
+- **Advantages**:
+  - Focuses on specific voices, reducing processing time.
+  - Allows for targeted improvements without redoing the entire song.
+- **Disadvantages**:
+  - Limited to processing a small number of voices per run.
+  - May require additional manual steps to align corrections with the video.
+
+---
+
+#### 3. **Applio Workflow (generate-videos-applio.py)**
+- **Overview**:
+  - This implementation is designed for single-voice scenarios. It simplifies the process by focusing on generating audio for one character at a time.
+- **Use Case**: Use this for quick adjustments or single-character songs.
+- **Diagram**: [View Process Diagram](#)
+- **Demo Video**: [Watch Applio Workflow in Action](#)
+- **Advantages**:
+  - Simplified workflow for one-character runs.
+  - Faster processing times for targeted use cases.
+- **Disadvantages**:
+  - Limited scalability for larger races or full songs.
+  - Less efficient for multiple-character scenarios.
+
+---
+
+### Summary Table
+
+| Workflow         | Best Use Case                  | Advantages                                    | Disadvantages                                  |
+|-------------------|--------------------------------|-----------------------------------------------|-----------------------------------------------|
+| **Jammable**      | Full song for all characters  | Efficient for multi-voice processing          | Requires pre-processed files, resource-heavy  |
+| **AI Cover**      | Refining specific voices      | Targeted corrections, faster for small changes| Limited to a few voices, manual adjustments   |
+| **Applio**        | Single-character adjustments  | Quick and simple for one character            | Inefficient for multiple characters           |
+
+
 
 ---
 
