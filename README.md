@@ -79,58 +79,70 @@ These three scripts (along with `generate-videos.py`) form **the backbone of the
 ## `generate-videos.py`: Comparison and Workflow
 
 ### Overview
-This section explores the three different implementations of the `generate-videos.py` script: `generate-videos-jammable.py`, `generate-videos-aicovergen.py`, and `generate-videos-applio.py`. Each implementation has unique strengths and trade-offs, making them suitable for specific use cases.
+The `generate-videos.py` script is implemented in three variations: `generate-videos-jammable.py`, `generate-videos-aicovergen.py`, and `generate-videos-applio.py`. While all three serve the same purpose — generating **CanicasBrawl** videos — each variation offers unique efficiencies and trade-offs depending on the context.
 
-For each implementation, you’ll find:
-- A **process diagram** illustrating the script’s workflow.
-- A **demo video** showing how the script generates a video.
-- An explanation of its **advantages**, **disadvantages**, and **recommended use cases**.
+This section explores the unique workflows of these scripts, showing:
+- A detailed explanation of the voice generation workflow for each platform.
+- Visual demonstrations with process diagrams and practical examples.
+- A breakdown of their strengths, limitations, and best use cases.
+
+---
 
 ### Implementations
 
-#### 1. **Jammable Workflow (generate-videos-jammable.py)**
-- **Overview**: 
-  - This implementation is ideal for generating complete songs for all characters. It processes multiple voice files at once, ensuring consistency across the entire song.
-- **Use Case**: Use this when you need to generate audio for every character in a race.
-- **Diagram**: [View Process Diagram](#)
-- **Demo Video**: [Watch Jammable Workflow in Action](#)
-- **Advantages**:
-  - Handles multiple voices efficiently.
-  - Produces consistent results for full songs.
-  - Minimal manual intervention once configured.
-- **Disadvantages**:
-  - Requires significant pre-processing and file organization.
-  - May be resource-intensive for large-scale processing.
+#### 1. **Jammable Workflow**  
+**Script**: `generate-videos-jammable.py`  
+- **Use Case**: Best for quickly generating full songs for all characters, providing a clear preview of the final race.
+- **How It Works**:
+  - Processes multiple voices simultaneously to generate audio for each character.
+  - Synchronizes the audio and video for the entire race.
+- **Why Use It?**:
+  - Fast, precise, and reliable for rapid prototyping and decision-making.
+  - Helps evaluate if a song or character setup works effectively for the race.
+- **Challenges**:
+  - Requires careful use to avoid overloading third-party resources.
+  - Subscription-based service, which may limit accessibility for some users.
+  - While quality is good, it’s not as clear or polished as AICoverGen for final production.
+- **Resources**:
+  - [View Process Diagram](#)
+  - [Watch Workflow in Action](#)
 
 ---
 
-#### 2. **AI Cover Workflow (generate-videos-aicovergen.py)**
-- **Overview**:
-  - This implementation is best suited for refining or correcting specific voices. It is useful when only a few characters need adjustments or updates.
-- **Use Case**: Use this to refine up to three character voices for an existing video setup.
-- **Diagram**: [View Process Diagram](#)
-- **Demo Video**: [Watch AI Cover Workflow in Action](#)
-- **Advantages**:
-  - Focuses on specific voices, reducing processing time.
-  - Allows for targeted improvements without redoing the entire song.
-- **Disadvantages**:
-  - Limited to processing a small number of voices per run.
-  - May require additional manual steps to align corrections with the video.
+#### 2. **r3gm/AICoverGen Workflow**  
+**Script**: `generate-videos-aicovergen.py`  
+- **Use Case**: Ideal for final production, refining or updating specific character voices with the best audio quality.
+- **How It Works**:
+  - Processes selected voices with high precision, ensuring clear and polished results.
+  - Can handle full songs or individual character adjustments, but it is slower compared to Jammable.
+- **Why Use It?**:
+  - Produces the highest-quality audio for **CanicasBrawl** videos.
+  - Perfect for finalizing projects after decisions on songs and character roles are made.
+- **Challenges**:
+  - Slower processing compared to Jammable, making it less suitable for rapid prototyping or experimentation.
+  - Requires significant resources to run locally (T4 GPU with High RAM) or a paid Google Colab subscription.
+  - Costs can add up, though not excessively.
+- **Resources**:
+  - [View Process Diagram](#)
+  - [Watch Workflow in Action](#)
 
 ---
 
-#### 3. **Applio Workflow (generate-videos-applio.py)**
-- **Overview**:
-  - This implementation is designed for single-voice scenarios. It simplifies the process by focusing on generating audio for one character at a time.
-- **Use Case**: Use this for quick adjustments or single-character songs.
-- **Diagram**: [View Process Diagram](#)
-- **Demo Video**: [Watch Applio Workflow in Action](#)
-- **Advantages**:
-  - Simplified workflow for one-character runs.
-  - Faster processing times for targeted use cases.
-- **Disadvantages**:
-  - Limited scalability for larger races or full songs.
-  - Less efficient for multiple-character scenarios.
+#### 3. **Applio Workflow**  
+**Script**: `generate-videos-applio.py`  
+- **Use Case**: Simplifies generating audio for one character at a time.
+- **How It Works**:
+  - Processes a single voice, making it ideal for quick edits or single-character content.
+  - Synchronizes the audio and video for the character's part.
+- **Why Use It?**:
+  - Lightweight and fast for specific needs.
+  - Excellent for quick edits or isolated scenarios.
+- **Challenges**:
+  - Not practical for multi-character tasks.
+- **Resources**:
+  - [View Process Diagram](#)
+  - [Watch Workflow in Action](#)
+
 
 ---
 
