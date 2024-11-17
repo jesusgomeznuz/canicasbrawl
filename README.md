@@ -44,9 +44,10 @@ This process is supported by two fundamental subprocesses:
   - Moving the most recent recording (run video) to the folder.
   - Moving `winner_log.csv` from the source directory to the `run_folder`.
   - Ensuring all necessary logs (`winner_log.csv`, `results.csv`, and `winner.csv`) are correctly organized for further processing.
-- **Output**:
+- **Output**: A structured folder containing:
   - The run video.
   - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
+- **Importance**: This script sets up the required files for further analysis and video generation.
 - **View Process Diagram**: [Guardar Run Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 2. **`voice-removal.py`**:
