@@ -24,16 +24,17 @@ The project is organized into the following key folders and files:
 ### Overview
 The core of the project is the main script, `generate-videos.py`, which connects and manages the different elements needed to produce **CanicasBrawl** videos. 
 
-1. **`generate-videos.py`**:
-   - Combines race video (run_folder) and character audio to produce final CanicasBrawl videos.
-   - Automates the process of:
-     - Verifying if a video has already been produced.
-     - Checking for missing character voice files.  
-     - Generating missing voices using integrated voice services ([Jammable](#), [Applio](#), or [AICoverGen](#)).
-     - Normalizing audio levels across all character tracks.
-     - Synchronizing the audio with the race video.
-   - Ensures the final video is stored in the raw production folder for further distribution.
-   - **[View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)**
+### 1. `generate-videos.py`
+- **Purpose**: Combines run video (from `run_folder`) and voice files (from `canciones`) to produce final CanicasBrawl videos.
+- **Automates the process of**:
+  - Verifying if a video has already been produced.
+  - Checking for missing character voice files.
+  - Generating missing voices using integrated voice services ([Jammable](https://www.jammable.com/), [Applio](https://applio.org/), or [AICoverGen](https://huggingface.co/spaces/r3gm/AICoverGen)).
+  - Cutting and joining audio tracks based on lead times from `winner_log.csv`.
+  - Synchronizing the audio with the race video.
+- **Output**: A fully synchronized video file ready for final distribution.
+- [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)
+
 
 This process is supported by two fundamental subprocesses:
 
@@ -48,7 +49,7 @@ This process is supported by two fundamental subprocesses:
   - The run video.
   - `winner_log.csv`, `results.csv` (for lead times), and `winner.csv`.
 - **Importance**: This script sets up the required files for further analysis and video generation.
-- **View Process Diagram**: [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
+- [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 2. **`voice-removal.py`**:
    - Takes as input the name, YouTube link, and start time of a song to:
