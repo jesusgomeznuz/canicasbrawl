@@ -34,7 +34,7 @@ def load_voice_models(csv_path):
 def convert_audio_with_playwright(nickname, audio_file_path, download_link, output_path, public_url):
     # Lanzar Playwright y configurar el navegador
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, slow_mo=500)
+        browser = p.chromium.launch(headless=False, slow_mo=500)
         context = browser.new_context(accept_downloads=True)
         page = context.new_page()
         page.goto(public_url)

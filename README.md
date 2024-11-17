@@ -22,7 +22,21 @@ The project is organized into the following key folders and files:
 ## How the Project Works
 
 ### Overview
-The core of the project is the main script, `generate-videos.py`, which connects and manages the different elements needed to produce **CanicasBrawl** videos. This process is supported by two fundamental subprocesses:
+The core of the project is the main script, `generate-videos.py`, which connects and manages the different elements needed to produce **CanicasBrawl** videos. 
+
+1. **`generate-videos.py`**:
+   - Combines race video (run_folder) and character audio to produce final CanicasBrawl videos.
+     - `winner_log.csv`: A log of the winner and run statistics.
+     - Run video: A video capture of the run itself.
+   - Automates the process of:
+     - Verifying if a video has already been produced.
+     - Checking for missing character voice files.  
+     - Generating missing voices using integrated voice services (Jammable, Applio, or AICoverGen).
+     - Normalizing audio levels across all character tracks.
+     - Synchronizing the audio with the race video.
+   - Ensures the final video is stored in the raw production folder for further distribution.
+
+This process is supported by two fundamental subprocesses:
 
 1. **`guardar-run.py`**:
    - Creates the run folder (`run_folder`) containing:

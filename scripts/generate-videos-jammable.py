@@ -134,7 +134,7 @@ def obtener_canciones_y_personajes(csv_path, runs_directory, used_runs):
 def convert_audio_with_selenium(links_nicknames, song_name):
     service = Service('C:/chromedriver-win64/chromedriver.exe')
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Ejecuta en modo headless
+    #chrome_options.add_argument("--headless")  # Ejecuta en modo headless
     chrome_options.add_argument("--start-maximized")
     driver = webdriver.Chrome(service=service, options=chrome_options)
     
@@ -449,3 +449,5 @@ else:
         os.makedirs(raw_production_folder, exist_ok=True)
         shutil.move(final_video_output_path, new_video_path)
         log_with_time(f"Video movido a: {new_video_path}")
+
+        os.startfile(raw_production_folder)
