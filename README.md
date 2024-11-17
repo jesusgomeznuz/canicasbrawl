@@ -182,6 +182,7 @@ Player1,15
 Player2,20
 Player3,30
 ...
+```
 
 ### Interaction with AI
 To optimize the race, **ChatGPT** was used to recommend a new arrangement for the marbles based on the times in `winner_log.csv`.
@@ -197,7 +198,7 @@ Marble Positions:
 2. Player2
 3. Player1
 ...
-
+```
 ---
 
 #### New Setup Photo
