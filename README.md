@@ -29,7 +29,7 @@ Key components include:
 - **`voice_removal.py`**: Downloads, processes, and organizes audio files into the `canciones` folder. It extracts 60-second segments from YouTube based on metadata in `log_canciones.csv`, separates vocals and music, and ensures all audio files are ready for synchronization.
 - **`log_canciones.csv`**: A key metadata file containing the YouTube URLs, start times, and track names required for processing and organizing the audio files.
 
-Together, these components feed into the `generate-videos.py` script, which combines the organized race video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
+Together, these components feed into the `generate-videos.py` script, which combines the organized run video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
 
 ### 1. `generate-videos.py`
 - **Purpose**: Combines run video (from `run_folder`) and voice files (from `canciones`) to produce final CanicasBrawl videos.
@@ -76,52 +76,61 @@ These three scripts (along with `generate-videos.py`) form **the backbone of the
 
 ---
 
-## Main Process Diagrams
+## `generate-videos.py`: Comparison and Workflow
 
-### 1. General Process: `generate-videos.py`
-This diagram illustrates the primary workflow of the script and how it interacts with subprocesses:
-- **Explainer Video**: [Watch video](#) *(Add link to the explainer video of the process)*
-- **Main Diagram**: [View diagram](#) *(Add link to the main flow diagram)*
+### Overview
+This section demonstrates the workflow of three different `generate-videos.py` implementations, highlighting their differences, advantages, and disadvantages. Each implementation includes a process diagram and a demo video to make the workflows clear and engaging.
 
-### 2. Subprocesses
-- **`guardar-run.py`**:
-  - **Description**: Generates the `run_folder`, essential for video generation.
-  - **Explainer Video**: [Watch video](#)
-  - **Process Diagram**: [View diagram](#)
+### Implementations
+1. **Centralized Fully-Automated Workflow**:
+   - **Diagram**: [View Process Diagram](#)
+   - **Demo Video**: [Watch Full Automation in Action](#)
+   - **Advantages**:
+     - Minimal manual intervention.
+     - Fully integrates audio and video processes.
+   - **Disadvantages**:
+     - Requires proper setup of pre-processed files.
+     - Higher resource demands.
 
-- **`voice-removal.py`**:
-  - **Description**: Downloads song segments and separates vocal and instrumental tracks.
-  - **Explainer Video**: [Watch video](#)
-  - **Process Diagram**: [View diagram](#)
+2. **Semi-Automated Workflow**:
+   - **Diagram**: [View Process Diagram](#)
+   - **Demo Video**: [Watch Semi-Automation in Action](#)
+   - **Advantages**:
+     - Balances automation and manual control.
+     - Easier to adapt for specific scenarios.
+   - **Disadvantages**:
+     - Requires more user interaction.
+     - Slower compared to the fully-automated workflow.
 
----
-
-## Supporting Processes
-
-In addition to the main processes, the project includes specific workflows that are key to content generation:
-
-- **Voice Generation**:
-  - **Description**: Processes using specific platforms (e.g., Jammable, CoverAIGen, and Applio).
-  - **Diagrams**:
-    - [Jammable](#)
-    - [CoverAIGen](#)
-    - [Applio](#)
-
-- **Final Audio Creation**:
-  - **Description**: Combines generated vocal tracks with the instrumental to create the final audio.
-  - **Process Diagram**: [View diagram](#)
-
-- **Winner Logging**:
-  - **Description**: Uses a C program in Unity to log the winners of each run.
-  - **Process Diagram**: [View diagram](#)
+3. **Manual Workflow**:
+   - **Diagram**: [View Process Diagram](#)
+   - **Demo Video**: [Watch Manual Workflow in Action](#)
+   - **Advantages**:
+     - Maximum control over each step.
+     - No dependency on complex scripts.
+   - **Disadvantages**:
+     - Time-intensive.
+     - Prone to human error.
 
 ---
 
-## Additional Resources
+## Interactive Example: AI-Generated 1vs1 Races
 
-- **Screenshots**: [Gallery](#)
-- **Project Demo Video**: [Watch video](#)
-- **Extended Documentation**: [View documentation](#)
+### Overview
+In this section, you’ll explore how AI is used to optimize **1vs1 races** for **CanicasBrawl**. This example walks through the workflow step by step, including how the AI interacts with the process and the visual differences in the final videos.
+
+### Process Flow
+1. **Interaction with AI (ChatGPT)**:
+   - Define parameters for the race setup.
+2. **Script Execution**:
+   - Generate the race video using the optimized parameters.
+3. **Visual Comparison**:
+   - Original Random Setup vs. AI-Optimized Setup.
+
+### Demo Videos
+- [ChatGPT Interaction Preview](#)
+- [Original Random Setup](#)
+- [AI-Optimized Setup](#)
 
 ---
 
