@@ -53,7 +53,6 @@ This process is supported by two fundamental subprocesses:
 
 These three scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
 
-
 ---
 
 ## Main Process Diagrams
