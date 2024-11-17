@@ -29,10 +29,11 @@ The core of the project is the main script, `generate-videos.py`, which connects
    - Automates the process of:
      - Verifying if a video has already been produced.
      - Checking for missing character voice files.  
-     - Generating missing voices using integrated voice services (Jammable, Applio, or AICoverGen).
+     - Generating missing voices using integrated voice services ([Jammable](#), [Applio](#), or [AICoverGen](#)).
      - Normalizing audio levels across all character tracks.
      - Synchronizing the audio with the race video.
    - Ensures the final video is stored in the raw production folder for further distribution.
+   - **[View Process Diagram](link-to-generate-videos-diagram)**
 
 This process is supported by two fundamental subprocesses:
 
@@ -41,14 +42,17 @@ This process is supported by two fundamental subprocesses:
      - `winner_log.csv`: A log of the winner and run statistics.
      - Run video: A video capture of the run itself.
    - This script is essential for generating the final videos.
+   - **[View Process Diagram](link-to-guardar-run-diagram)**
 
 2. **`voice-removal.py`**:
    - Takes as input the name, YouTube link, and start time of a song to:
      - Download a 1-minute segment.
      - Separate vocal and instrumental tracks.
    - **Note**: This process requires manual intervention due to platform limitations that detect Selenium as a bot.
+   - **[View Process Diagram](link-to-voice-removal-diagram)**
 
 These three scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
+
 
 ---
 
