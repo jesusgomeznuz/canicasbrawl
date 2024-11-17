@@ -35,7 +35,6 @@ The core of the project is the main script, `generate-videos.py`, which connects
 - **Output**: A fully synchronized video file ready for final distribution.
 - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)
 
-
 This process is supported by two fundamental subprocesses:
 
 ### 1. `guardar_run.py`
@@ -44,7 +43,7 @@ This process is supported by two fundamental subprocesses:
   - Creating the `run_folder` and organizing its contents.
   - Moving the most recent recording (`Movie_*.mp4`) to the folder for video generation.
   - Moving `winner_log.csv` to the `run_folder` as the key file required for generating the final video.
-  - Saving `results.csv` and `winner.csv` in the `run_folder` to maintain a historical record of lead times and winners in `historico_runs.xlsx`.
+  - Generating `results.csv` and `winner.csv` in the `run_folder` to maintain a historical record of lead times and winners in `historico_runs.xlsx`.
 - **Output**: A structured `run_folder` containing:
   - The run video (`Movie_*.mp4`).
   - `winner_log.csv` (required for video generation).
@@ -53,12 +52,17 @@ This process is supported by two fundamental subprocesses:
 - **Purpose**: This script organizes essential files needed for video generation and maintains a history of runs for analysis.
 - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
-2. **`voice-removal.py`**:
-   - Takes as input the name, YouTube link, and start time of a song to:
-     - Download a 1-minute segment.
-     - Separate vocal and instrumental tracks.
-   - **Note**: This process requires manual intervention due to platform limitations that detect Selenium as a bot.
-   - **[View Process Diagram](link-to-voice-removal-diagram)**
+### 2. `voice_removal.py`
+- **Purpose**: Downloads audio from YouTube, extracts specific segments, and organizes them in the `canciones` folder for further processing.
+- **Automates the process of**:
+  - Reading song metadata from `log_canciones.csv` to determine the YouTube video to download.
+  - Downloading audio files from YouTube using `yt_dlp` and extracting 60-second segments based on start times defined in the log.
+  - Extracting music and vocals from the YouTube segment and organizing the processed files in the `canciones` folder (requires manual intervention for separation).
+- **Output**: A well-organized folder structure for each song, feeding the `canciones` folder with:
+  - `instrumental.mp3` (the instrumental track).
+  - `voz.mp3` (the vocal track).
+  - `[song_name].mp3` (the original 60-second segment).
+- **Purpose**: This script ensures the `canciones` folder is filled with the required audio files of songs. It prepares audio files for synchronization with run videos while maintaining a clean backup system.
 
 These three scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
 
