@@ -243,8 +243,9 @@ ChatGPT suggested the following arrangement:
 - **Player5**: Mordecai - 3.699 s  
 
 **Total Time for Marceline:**
-text
+```text
 16.899 + 3.701 + 1.133 + 3.699 = 25.432 seconds
+```
 
 ##### Dipper:
 - **Player4**: Marceline - 8.699 s  
