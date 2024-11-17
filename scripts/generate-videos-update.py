@@ -7,9 +7,18 @@ import pandas as pd
 from glob import glob
 from pydub import AudioSegment
 from moviepy.editor import VideoFileClip, AudioFileClip
-from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import sync_playwright, TimeoutError
+import requests
 
 public_url = None  # Variable global para almacenar la URL pública
+
+def verificar_url_activo(url):
+    try:
+        response = requests.get(url, timeout=5)
+        # Verificamos si el código de estado es 200 (OK)
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
 
 def log_with_time(message):
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {message}")
@@ -47,12 +56,16 @@ def convert_audio_with_playwright(nickname, audio_file_path, download_link, outp
 
             # Esperar a que las opciones del menú desplegable estén disponibles
             options_selector = 'ul[role="listbox"] li[role="option"]'
-            page.wait_for_selector(options_selector, timeout=5000)
-            options = page.query_selector_all(options_selector)
-
-            # Extraer los nombres de los modelos
-            model_names = [option.inner_text().strip() for option in options]
-            print(f"Modelos disponibles: {model_names}")
+            try:
+                page.wait_for_selector(options_selector, timeout=5000)
+                options = page.query_selector_all(options_selector)
+                # Extraer los nombres de los modelos
+                model_names = [option.inner_text().strip() for option in options]
+                print(f"Modelos disponibles: {model_names}")
+            except TimeoutError:
+                # Si no hay opciones en el dropdown, la espera expirará
+                print("No se encontraron modelos en el dropdown. Procediendo a agregar el modelo.")
+                model_names = []
 
             if nickname not in model_names:
                 print(f"El modelo '{nickname}' no está disponible. Procediendo a agregarlo.")
@@ -99,7 +112,7 @@ def convert_audio_with_playwright(nickname, audio_file_path, download_link, outp
                         arg=nickname
                     )
                     print("Modelo descargado y cargado exitosamente.")
-                except PlaywrightTimeoutError:
+                except TimeoutError:
                     print("No se recibió mensaje de éxito en el tiempo esperado.")
                     browser.close()
                     return
@@ -175,7 +188,7 @@ def convert_audio_with_playwright(nickname, audio_file_path, download_link, outp
             download.save_as(output_file_path)
             print("Descarga del audio completada.")
 
-        except PlaywrightTimeoutError as e:
+        except Exception as e:
             print(f"Error: {e}")
             browser.close()
             return
@@ -247,6 +260,35 @@ def verificar_archivos_cancion(cancion_folder):
 def verificar_y_convertir_voces(winner_data, cancion_folder, voice_models):
     global public_url  # Usamos la variable global para almacenar la URL
 
+    # Ruta del archivo donde almacenaremos el URL público
+    url_file_path = 'public_url.txt'
+
+    # Verificar si el URL público ya está almacenado y es válido
+    if public_url is None:
+        if os.path.exists(url_file_path):
+            with open(url_file_path, 'r') as f:
+                stored_url = f.read().strip()
+                if verificar_url_activo(stored_url):
+                    public_url = stored_url
+                    log_with_time(f"Usando el URL público almacenado: {public_url}")
+                else:
+                    log_with_time("El URL público almacenado no está activo.")
+        else:
+            log_with_time("No se encontró un URL público almacenado.")
+
+    # Si el URL público sigue siendo None, solicitar uno nuevo
+    if public_url is None:
+        public_url = input("Por favor, introduce la URL pública para realizar la conversión: ")
+        # Verificar si el URL ingresado es válido
+        if verificar_url_activo(public_url):
+            # Almacenar el nuevo URL en el archivo
+            with open(url_file_path, 'w') as f:
+                f.write(public_url)
+            log_with_time(f"Nuevo URL público almacenado: {public_url}")
+        else:
+            log_with_time("El URL público ingresado no es válido. Por favor, verifica y vuelve a intentarlo.")
+            return False  # Salir de la función si el URL no es válido
+
     all_exist = True
     for nickname in winner_data['Nickname'].unique():
         nickname_lower = nickname.lower()
@@ -255,10 +297,6 @@ def verificar_y_convertir_voces(winner_data, cancion_folder, voice_models):
         if nickname_lower in voice_models:
             if not os.path.exists(player_audio_path_mp3) and not os.path.exists(player_audio_path_wav):
                 log_with_time(f"Falta el archivo de voz para {nickname}. Generando...")
-
-                # Solicitar la URL pública solo si no ha sido solicitada antes
-                if public_url is None:
-                    public_url = input("Por favor, introduce la URL pública para realizar la conversión: ")
 
                 # Llamar a la función de conversión con Playwright
                 convert_audio_with_playwright(
@@ -287,15 +325,15 @@ def main():
     num_runs_disponibles = listar_runs_disponibles(runs_directory)
     log_with_time(f"Hay {num_runs_disponibles} runs disponibles para producción")
 
-    if num_runs_disponibles < num_canciones:
-        log_with_time("No hay suficientes runs para producir todas las canciones.")
-        return
-
     used_runs = set()
 
     with open(log_canciones_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for i, row in enumerate(reader):
+
+        reader = list(csv.DictReader(csvfile))
+        # Tomar solo las primeras 'num_runs_disponibles' canciones
+        canciones_a_procesar = reader[:num_runs_disponibles]
+
+        for row in canciones_a_procesar:
             cancion_nombre = row['nombre']
             cancion_folder = os.path.join(r"D:\canicasbrawl\canciones", cancion_nombre)
             
