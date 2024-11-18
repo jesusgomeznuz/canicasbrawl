@@ -28,17 +28,18 @@ The core of the project is the integration of multiple scripts and processes, al
 Key components include:
 - **`guardar_run.py`**: Prepares the `run_folder` by organizing the race video (`Movie_*.mp4`) and necessary log files (`winner_log.csv`). It also maintains historical data in `historico_runs.xlsx` for lead times and winners.
 - **`voice_removal.py`**: Downloads, processes, and organizes audio files into the `canciones` folder. It extracts 60-second segments from YouTube based on metadata in `log_canciones.csv`, separates vocals and music, and ensures all audio files are ready for synchronization.
-- **`log_canciones.csv`**: Acts as the main queue of songs, specifying which tracks from the `canciones` folder should be processed and used in each run.
+-- **`log_canciones.csv`**: Acts as the main queue of songs, determining which tracks from the `canciones` folder are used during the video production process.
 
 Together, these components feed into the `generate-videos.py` script, which combines the organized run video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
 
 ### 1. `generate-videos.py`
-- **Purpose**: Combines run video (from `run_folder`) and voice files (from `canciones`) to produce final CanicasBrawl videos.
+- **Purpose**: Combines the run video (from `run_folder`) and voice files (from `canciones`) to produce final CanicasBrawl videos.
 - **Automates the process of**:
   - Verifying if a video has already been produced.
   - Checking for missing character voice files.
   - Generating missing voices using integrated voice services ([Jammable](https://www.jammable.com/), [Applio](https://applio.org/), or [AICoverGen](https://huggingface.co/spaces/r3gm/AICoverGen)).
-  - Cutting and joining audio tracks based on lead times from `winner_log.csv`.
+  - Using `log_canciones.csv` as the main song queue to select and organize audio files for the run.
+  - Cutting and joining audio tracks based on the leader transitions recorded in `winner_log.csv`, ensuring that the audio dynamically matches the race leader.
   - Synchronizing the audio with the race video.
 - **Output**: A fully synchronized video file ready for final distribution.
 
@@ -54,14 +55,13 @@ This process is supported by two fundamental subprocesses:
 - **Automates the process of**:
   - Creating the `run_folder` and organizing its contents.
   - Moving the most recent recording (`Movie_*.mp4`) to the folder for video generation.
-  - Moving `winner_log.csv` to the `run_folder` as the key file required for generating the final video.
+  - Moving `winner_log.csv` to the `run_folder` to map leader transitions, which are later matched to songs using `log_canciones.csv`.
   - Generating `results.csv` and `winner.csv` in the `run_folder` to maintain a historical record of lead times and winners in `historico_runs.xlsx`.
 - **Output**: A structured `run_folder` containing:
   - The run video (`Movie_*.mp4`).
   - `winner_log.csv` (required for video generation).
   - `results.csv` (for lead times).
   - `winner.csv` (for historical records).
-- **Purpose**: This script organizes essential files needed for video generation and maintains a history of runs for analysis.
 - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/guardar_run.png)
 
 ### 2. `voice_removal.py`
