@@ -172,7 +172,7 @@ In this section, you'll see how ChatGPT o1-preview improves 1vs1 races in Canica
 ![Initial Setup](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/initial_setup.jpg)
 
 #### Winner Log Data
-The original race times and positions from `winner_log.csv` and `winner_list.csv` are summarized below:
+The race shown in the initial setup produces the following times and positions, taken from winner_log.csv and summarized in winner_list.csv, as shown below.
 
 ```csv
 Table 1 (original without duplicates):
@@ -292,14 +292,16 @@ The optimization process demonstrates the scalability and adaptability of **Cani
 
 To conclude, here are two additional diagrams highlighting valuable scripts that enhance the understanding of **CanicasBrawl's** functionality: 
 
-#### 1. Winner Log Generation (`WinnerTracker.cs`)
-This diagram provides a visual overview of the `WinnerTracker.cs` script in Unity. It showcases how the script tracks the current race leader in real time and logs transitions in leadership to the `winner_log.csv` file. The diagram highlights interactions with `WinnerDetector`, ensuring accurate data capture for post-race analytics.
+#### 1. Winner Log Generation (`WinnerTracker.cs`)  
+This diagram provides a visual overview of the `WinnerTracker.cs` script in Unity. It showcases how the script tracks the current race leader in real time and logs transitions in leadership to the `winner_log.csv` file.  
+The diagram highlights interactions with `WinnerDetector`, ensuring accurate data capture for post-race analytics.  
 [Winner Log Generation Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/WinnerTracker.png)
 
-#### 2. Final Audio Creation (`create_final_audio`)
-This diagram illustrates how the `create_final_audio` function processes audio tracks to align them with race data. It overlays normalized player segments with an instrumental track to create the final race audio. This process ensures that each race has a unique and dynamic soundtrack.
+#### 2. Final Audio Creation (`create_final_audio`)  
+This diagram illustrates how the `create_final_audio` function processes audio tracks to align them with race data.  
+It overlays normalized player segments with an instrumental track to create the final race audio.  
+This process ensures that each race has a unique and dynamic soundtrack.  
 [Final Audio Creation Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/create_final_audio.png)
-
 
 ---
 
