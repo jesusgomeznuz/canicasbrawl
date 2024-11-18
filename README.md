@@ -108,7 +108,7 @@ This section explores the unique workflows of these scripts, showing:
   - Subscription-based service, which may limit accessibility for some users.
   - While quality is good, it’s not as clear or polished as AICoverGen for final production.
 - **Resources**:
-  - [View Process Diagram](#)
+  - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/jammable.png)
   - [Watch Workflow in Action](#)
 
 ---
@@ -127,7 +127,7 @@ This section explores the unique workflows of these scripts, showing:
   - Requires significant resources to run locally (T4 GPU with High RAM) or a paid Google Colab subscription.
   - Costs can add up, though not excessively.
 - **Resources**:
-  - [View Process Diagram](#)
+  - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/AICoverGen.png)
   - [Watch Workflow in Action](#)
 
 ---
@@ -146,7 +146,7 @@ This section explores the unique workflows of these scripts, showing:
   - Processing speed depends on local hardware; slower on less powerful systems.
   - Often requires post-processing (e.g., cleaning voices with AICoverGen) for production-quality results.
 - **Resources**:
-  - [View Process Diagram](#)
+  - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/Applio.png)
   - [Watch Workflow in Action](#)
 
 
