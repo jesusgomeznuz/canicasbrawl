@@ -33,14 +33,13 @@ Key components include:
 Together, these components feed into the `generate-videos.py` script, which combines the organized run video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
 
 ### 1. `generate-videos.py`
-- **Purpose**: Combines the run video (from `run_folder`) and voice files (from `canciones`) to produce final CanicasBrawl videos.
+- **Purpose**: Combines the run video (from `run_folder`), the song queue (`log_canciones.csv`), and voice files (from `canciones`) to produce final CanicasBrawl videos. It ensures a seamless synchronization of songs with race leader transitions.
 - **Automates the process of**:
+  - **Reviewing `log_canciones.csv` as the primary song queue** to determine the songs available for the next runs. It prints the number of songs in the queue and the number of runs available for processing.
   - Verifying if a video has already been produced.
   - Checking for missing character voice files.
   - Generating missing voices using integrated voice services ([Jammable](https://www.jammable.com/), [Applio](https://applio.org/), or [AICoverGen](https://huggingface.co/spaces/r3gm/AICoverGen)).
-  - Using `log_canciones.csv` as the main song queue to select and organize audio files for the run.
-  - Cutting and joining audio tracks based on the leader transitions recorded in `winner_log.csv`, ensuring that the audio dynamically matches the race leader.
-  - Synchronizing the audio with the race video.
+  - Cutting and joining audio tracks from the queue based on the leader transitions recorded in `winner_log.csv`, dynamically matching the audio to the race leader.
 - **Output**: A fully synchronized video file ready for final distribution.
 
 **Process Diagram**:
