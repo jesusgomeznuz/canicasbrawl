@@ -9,11 +9,10 @@
 
 The project is organized into the following key folders and files:
 
-- **raw production/**: Stores intermediate materials generated during content creation, such as unedited videos.
 - **runs/**: Folder containing data and videos for each run.
 - **canciones/**: Contains the songs used in the project, including separated vocal and instrumental tracks.
+- **raw production/**: Stores intermediate materials generated during content creation, such as unedited videos.
 - **scripts/**: Python scripts for automation.
-- **CanicasBrawl/**: Unity project folder with essential images, scripts, and assets. (It's not in this repository)
 - **historico_runs.xlsx**: File that logs the historical data of all previous runs.
 - **prompt1.txt**: File with prompts used for automation assistance.
 
