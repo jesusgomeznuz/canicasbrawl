@@ -220,7 +220,7 @@ Table 2 (total times per player):
 ```
 
 ### AI-Optimized Arrangement
-To improve the race dynamics, **ChatGPT** was used to suggest a new arrangement based on the times from the `winner_log.csv`.
+To enhance the dynamics of a 1vs1 race between Marceline and Dipper, ChatGPT analyzed the `winner_log.csv` and `winner_list.csv` data. The goal was to balance singing times, alternate leadership frequently, and create an engaging competition while maintaining fairness.
 
 #### ChatGPT Interaction
 You can view the full conversation with **ChatGPT** [here](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/chatgpt_interaction.md).
