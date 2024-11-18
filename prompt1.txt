@@ -1,71 +1,64 @@
-Hola! Hago un juego llamado Canicas Brawl que consta de asignarle jugadores a canicas, que compiten en una carrera, y siempre que una canica va a la cabeza, utilizo el modelo de voz del personaje asignado para cantar una canción con AI. Es decir, las canicas canta una cierta canción, y siempre canta el personaje que va a la cabeza. Esto lo logro con Unity, generando un archivo .csv que lleva el registro de cambio de lider para ayudarme a editar el audio, y también tengo una archivo .csv que me da el tiempo total que cada canica cantó para cambiar las posiciones con respecto a lo que estoy buscando. 
+Hello! I’m working on a game called Canicas Brawl, which involves assigning players to marbles that compete in a race. Whenever a marble takes the lead, I use the assigned character's voice model to sing a song using AI. In other words, the marbles sing a specific song, and the leading character always sings. I achieve this with Unity by generating a .csv file that records leadership changes to help me edit the audio. I also have a .csv file that logs the total time each marble sings, which helps me adjust their positions based on my goals.
 
-En esta ocasión lo que quiero hacer es una carrera vs (1vs1), en donde tendré 8 canicas compitiendo, quiero sustituir las canicas consiguiendo lo siguiente:
+In this ocasion, I want to create a 1vs1 race, where 8 marbles will compete. My goal is to substitute the original marbles while meeting the following criteria:
 
-1. Que el tiempo total de canto sea aproximadamente igual. (Prioridad alta)
-2. Que gane la canica que canta menos tiempo. (Prioridad alta)
-3. Que la relación de canicas sea 4:4. (Prioridad alta)
-4. Que se trate de maximiar los cambios de líder para que ambas canicas no solo canten la misma cantidad de tiempo, sino que constatemente cambien de cantante. (Prioridad baja)
+1. The total singing time should be approximately equal. (High Priority)
+2. The distribution of marbles should be 4:4. (High Priority)
+3. There should be frequent leadership changes, ensuring that both marbles not only sing for the same amount of time but also alternate singing constantly. (High Priority)
+4. The marble that sings the least amount of time should win. (Low Priority)
 
-Te  comparto las posiciones actuales, mis listas de cambio de lider, y tiempo total de canto de cada tabla. Es importante que notes que hay 8 canicas, y todas tienen asignados a un jugador, y tú tienes que decirme qué canicas debo sustituir por los jugadores originales para conseguir este efecto 1vs1.
+I’m sharing the current positions, my winner logs, and the total singing time for each table. It's important to note that there are 8 marbles, and all are assigned to a player. You need to tell me which marbles I should substitute for the original players to achieve the desired 1v1 effect.
 
-PS C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame> python duplicates.py
-Tabla 1 (original sin duplicados):
+In total, there are 8 players. If one doesn’t appear, assume they didn’t sing and assign them anyway.
+
+```csv
+Table 1 (original without duplicates):
             Time   Winner   Nickname
-0   00:00:00:000  Player5      Ben10
-2   00:00:03:033  Player4  marceline
-4   00:00:03:333  Player8     Minion
-6   00:00:06:033  Player7     Darwin
-8   00:00:06:100  Player2       Rayo
-10  00:00:06:200  Player7     Darwin
-12  00:00:06:667  Player6        BMO
-14  00:00:07:333  Player2       Rayo
-16  00:00:07:433  Player6        BMO
-18  00:00:07:467  Player2       Rayo
-20  00:00:09:033  Player7     Darwin
-22  00:00:09:067  Player1       Bart
-24  00:00:09:200  Player8     Minion
-26  00:00:09:267  Player4  marceline
-28  00:00:12:300  Player8     Minion
-30  00:00:12:367  Player4  marceline
-32  00:00:13:900  Player8     Minion
-34  00:00:14:033  Player4  marceline
-36  00:00:19:300  Player8     Minion
-38  00:00:19:533  Player4  marceline
-40  00:00:20:133  Player7     Darwin
-42  00:00:21:533  Player8     Minion
-44  00:00:21:600  Player7     Darwin
-46  00:00:24:267  Player5      Ben10
-48  00:00:24:533  Player8     Minion
-50  00:00:24:700  Player4  marceline
-52  00:00:25:600  Player5      Ben10
-54  00:00:27:100  Player8     Minion
-56  00:00:27:700  Player2       Rayo
-58  00:00:30:033  Player7     Darwin
-60  00:00:30:867  Player5      Ben10
-62  00:00:31:600  Player7     Darwin
-64  00:00:31:633  Player5      Ben10
-66  00:00:33:033  Player8     Minion
-68  00:00:33:300  Player1       Bart
-70  00:00:33:333  Player6        BMO
-72  00:00:33:433  Player1       Bart
-74  00:00:36:767  Player7     Darwin
-76  00:00:37:000  Player1       Bart
-78  00:00:44:600  Player7     Darwin
-80  00:00:49:300  Player8     Minion
-82  00:00:50:133  Player7     Darwin
+0   00:00:00:000  Player5   Mordecai
+2   00:00:03:033  Player7     Naruto
+4   00:00:03:333  Player8      Ben10
+6   00:00:04:000  Player4  marceline
+8   00:00:04:133  Player8      Ben10
+10  00:00:06:033  Player7     Naruto
+12  00:00:06:067  Player1       Finn
+14  00:00:06:200  Player3     Steven
+16  00:00:07:000  Player1       Finn
+18  00:00:09:000  Player2        BMO
+20  00:00:09:067  Player4  marceline
+22  00:00:09:133  Player2        BMO
+24  00:00:09:200  Player8      Ben10
+26  00:00:13:133  Player4  marceline
+28  00:00:15:700  Player8      Ben10
+30  00:00:17:267  Player4  marceline
+32  00:00:21:167  Player8      Ben10
+34  00:00:23:967  Player5   Mordecai
+36  00:00:24:033  Player8      Ben10
+38  00:00:24:667  Player5   Mordecai
+40  00:00:24:867  Player1       Finn
+42  00:00:26:933  Player8      Ben10
+44  00:00:26:967  Player1       Finn
+46  00:00:27:600  Player8      Ben10
+48  00:00:28:000  Player4  marceline
+50  00:00:30:033  Player7     Naruto
+52  00:00:30:800  Player5   Mordecai
+54  00:00:31:200  Player7     Naruto
+56  00:00:33:033  Player1       Finn
+58  00:00:33:400  Player2        BMO
+60  00:00:36:967  Player1       Finn
+62  00:00:48:667  Player6      Quico
+64  00:00:53:967  Player3     Steven
+66  00:00:54:300  Player7     Naruto
 
-Tabla 2 (tiempos totales por jugador):
+Table 2 (total times per player):
     Nickname    Time
-0      Ben10   6.932
-1  marceline  11.633
-2     Minion   5.134
-3     Darwin  13.502
-4       Rayo   4.099
-5        BMO   0.800
-6       Bart  11.100
+0   Mordecai   3.699
+1     Naruto   1.834
+2      Ben10  11.935
+3  marceline   8.699
+4       Finn  16.899
+5     Steven   1.133
+6        BMO   3.701
+7      Quico   5.300
+```
 
-Duplicados eliminados y archivos guardados como 'winner_log_clean.csv' y 'winner_times.csv'
-PS C:\Users\LENOVO\AppData\LocalLow\DefaultCompany\HowToMakeAVideoGame>
-
-Competirá DulcePrincesa y Quico, y ganará DulcePrincesa, también asigna las canicas que no salgan.
+Marceline and Dipper will compete; also, assign the marbles that will not participate.

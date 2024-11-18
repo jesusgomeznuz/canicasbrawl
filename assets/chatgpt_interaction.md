@@ -77,6 +77,8 @@ Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
 3. **Maximize leader changes** so both characters not only sing the same amount of time but also constantly alternate singing (**High Priority**).
 4. **Have the marble with the least singing time win** (**Low Priority**).
 
+Marceline and Dipper will compete; also, assign the marbles that will not participate.
+
 ---
 
 ## Provided Data:
