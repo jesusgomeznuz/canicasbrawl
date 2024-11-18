@@ -66,6 +66,8 @@ Table 2 (total times per player):
 7      Quico   5.300
 ```
 
+Marceline and Dipper will compete; also, assign the marbles that will not participate.
+
 ## ChatGPT o1-preview Response (Thought for 1m 47s)
 
 Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
@@ -76,8 +78,6 @@ Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
 2. **Maintain a 4:4 marble ratio** between both characters (**High Priority**).
 3. **Maximize leader changes** so both characters not only sing the same amount of time but also constantly alternate singing (**High Priority**).
 4. **Have the marble with the least singing time win** (**Low Priority**).
-
-Marceline and Dipper will compete; also, assign the marbles that will not participate.
 
 ---
 
