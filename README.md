@@ -313,8 +313,14 @@ This process ensures that each race has a unique and dynamic soundtrack.
 ---
 
 ## Next Steps
-1. Document additional processes as needed.
-2. Add links to explainer videos and diagrams when they are ready.
-3. Continue optimizing the core scripts for better efficiency.
+1. **Optimize Game Design for Flexibility**  
+   Simplify the player data system to make it easier to add new players and modify backgrounds. Focus on creating a dynamic level generation system by incorporating common obstacle patterns and varying their order of appearance. This will keep levels fresh and engaging while making future updates and changes more manageable.
+
+2. **Automate Voice Generation**  
+   Develop scripts to automate the extraction and generation of new character voices. This involves diarizing YouTube videos to isolate voice segments based on a character's appearance, sending these segments to an audio bank, and processing them into usable voice files. This approach will ensure a steady stream of new voices, identify fan favorites, and maintain audience interest.
+
+3. **Enable User-Generated Videos**  
+   Work on simplifying the video creation process for users. This feature will allow users to input converted audio files, set up marble races, and have tracks dynamically update based on which player is in the lead. Making this process more accessible will broaden engagement and enhance user experience.
+
 
 ---
