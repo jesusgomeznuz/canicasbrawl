@@ -109,7 +109,7 @@ This section explores the unique workflows of these scripts, showing:
   - While quality is good, it’s not as clear or polished as AICoverGen for final production.
 - **Resources**:
   - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/jammable.png)
-  - [Watch Workflow in Action](#)
+  - [Watch Workflow in Action](https://drive.google.com/file/d/1wA-9G51DJUBaLN_zec-aCZTNGpND5ot7/view?usp=sharing)
 
 ---
 
@@ -128,7 +128,7 @@ This section explores the unique workflows of these scripts, showing:
   - Costs can add up, though not excessively.
 - **Resources**:
   - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/AICoverGen.png)
-  - [Watch Workflow in Action](#)
+  - [Watch Workflow in Action](https://drive.google.com/file/d/1TJD9XPC5EW-qPIH8XRtvKvJ1gdJJQpFo/view?usp=sharing)
 
 ---
 
@@ -147,7 +147,7 @@ This section explores the unique workflows of these scripts, showing:
   - Often requires post-processing (e.g., cleaning voices with AICoverGen) for production-quality results.
 - **Resources**:
   - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/Applio.png)
-  - [Watch Workflow in Action](#)
+  - [Watch Workflow in Action](https://drive.google.com/file/d/1fLL0_rjS0zbbhg93d-NWkbagxR4KQSNt/view?usp=sharing)
 
 
 ---
@@ -271,7 +271,7 @@ The following video showcases the **Original Setup** versus the **AI-Optimized S
 In addition, this video includes a demonstration of the script `generate-videos-jammable.py` in action. 
 
 #### Script Execution Video
-[Watch the Script in Action](path/to/script_execution_demo.mp4)
+[Watch the Script in Action](https://drive.google.com/file/d/1G8Z9XosDuK4ynH42xNVoTrqoVpYtK2DT/view?usp=sharing)
 
 ---
 
@@ -290,7 +290,7 @@ The optimization process demonstrates the scalability and adaptability of **Cani
 
 ### Additional Support Diagrams
 
-To conclude, here are two additional diagrams highlighting valuable scripts that enhance the understanding of **CanicasBrawl's** functionality:
+To conclude, here are two additional diagrams highlighting valuable scripts that enhance the understanding of **CanicasBrawl's** functionality: 
 
 #### 1. Winner Log Generation (`WinnerTracker.cs`)
 This diagram provides a visual overview of the `WinnerTracker.cs` script in Unity. It showcases how the script tracks the current race leader in real time and logs transitions in leadership to the `winner_log.csv` file. The diagram highlights interactions with `WinnerDetector`, ensuring accurate data capture for post-race analytics.
