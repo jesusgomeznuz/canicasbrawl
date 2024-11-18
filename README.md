@@ -40,7 +40,7 @@ Together, these components feed into the `generate-videos.py` script, which comb
   - Cutting and joining audio tracks based on lead times from `winner_log.csv`.
   - Synchronizing the audio with the race video.
 - **Output**: A fully synchronized video file ready for final distribution.
-- [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)
+- ![View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/generate-videos-diagram.png)
 
 This process is supported by two fundamental subprocesses:
 
