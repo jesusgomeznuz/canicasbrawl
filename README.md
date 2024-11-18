@@ -284,10 +284,24 @@ The optimization process demonstrates the scalability and adaptability of **Cani
 
 ---
 
+### Additional Support Diagrams
+
+To conclude, here are two additional diagrams highlighting valuable scripts that enhance the understanding of **CanicasBrawl's** functionality:
+
+#### 1. Final Audio Creation (`create_final_audio`)
+This diagram demonstrates how the script combines audio tracks, aligns them based on race data, and overlays them with the instrumental track to produce the final race audio:
+[Final Audio Creation Diagram](https://yourlink.com/create_final_audio-diagram.png)
+
+#### 2. Winner Log Generation (`Algo.cs`)
+This diagram outlines the Unity C# script used to generate the `winner_log.csv`, which records race leader transitions in real time:
+[Winner Log Generation Diagram](https://yourlink.com/winner_log-generation-diagram.png)
+
+---
+
 ## Contact
-- **Name:** Jesús
-- **Email:** your_email@example.com
-- **LinkedIn:** [Your Profile](https://linkedin.com/in/your_profile)
+- **Name:** Jesús Gómez
+- **Email:** info@canicasbrawl
+- **Discord:** jesus.gomeznz
 
 ---
 
