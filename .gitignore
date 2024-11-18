@@ -1,9 +1,9 @@
-# Excluir formatos de archivo
+# Excluir formatos de archivo por defecto
 *.mp3
 *.mp4
 *.wav
 
-# Excluir directorios
+# Excluir directorios completos
 backups/
 canciones/
 CanicasBrawl/
@@ -18,8 +18,16 @@ Production/
 raw production/
 Runs/
 
-# Excluir de la ignorancia los runs específicos
-!/runs/Run162/
-!/runs/Run163/
-!/canciones/rosapastel
-!/canciones/ecosdeamor
+# Incluir los runs específicos
+!/Runs/Run162/
+!/Runs/Run163/
+
+# Incluir archivos específicos dentro de Run162 y Run163
+/Runs/Run162/*
+!/Runs/Run162/*.csv
+/Runs/Run163/*
+!/Runs/Run163/*.csv
+
+# Incluir las canciones específicas
+!/canciones/rosapastel.mp3
+!/canciones/ecosdeamor.mp3
