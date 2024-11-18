@@ -66,7 +66,7 @@ Table 2 (total times per player):
 7      Quico   5.300
 ```
 
-## ChatGPT's Response (Thought for 1m 47s)
+## ChatGPT o1-preview Response (Thought for 1m 47s)
 
 Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
 
