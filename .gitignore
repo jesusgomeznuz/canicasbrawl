@@ -17,3 +17,9 @@ parche huggingface/
 Production/
 raw production/
 Runs/
+
+# Excluir de la ignorancia los runs específicos
+!/runs/Run162/
+!/runs/Run163/
+!/canciones/rosapastel
+!/canciones/ecosdeamor
