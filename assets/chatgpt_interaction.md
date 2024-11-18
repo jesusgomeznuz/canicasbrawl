@@ -68,7 +68,7 @@ Table 2 (total times per player):
 
 ## ChatGPT's Response (Thought for 1m 47s)
 
-# Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
+Marble Assignment to Achieve a 1vs1 Effect Between Marceline and Dipper
 
 ## Objectives:
 
