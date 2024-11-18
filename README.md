@@ -1,7 +1,9 @@
 # CanicasBrawl
 
 ## Introduction
-**CanicasBrawl** is a Unity-based project that combines simulation mechanics, music, and visual storytelling. The primary goal is to provide a unique and exciting experience through interactions with marbles, songs, and iconic characters. Additionally, the project integrates **Python automation scripts** to optimize content generation, from videos to detailed statistics.
+**CanicasBrawl** is a Unity-based project that combines simulation mechanics, music, and visual storytelling. The primary goal is to provide a unique and exciting experience through interactions with marbles, songs, and iconic characters. 
+
+A key feature of the project is its integration of **Python automation scripts**, which streamline content generation, from videos to detailed statistics. These scripts work together to process race data (`winner_log.csv`), manage song queues (`log_canciones.csv`), and synchronize audio with visual content, ensuring a seamless and dynamic experience.
 
 ---
 
@@ -23,10 +25,14 @@ The project is organized into the following key folders and files:
 ### Overview
 The core of the project is the integration of multiple scripts and processes, all working together to produce **CanicasBrawl** videos. The main script, `generate-videos.py`, connects these elements to ensure seamless video production.
 
+### Overview
+The core of the project is the integration of multiple scripts and processes, all working together to produce **CanicasBrawl** videos. The main script, `generate-videos.py`, connects these elements to ensure seamless video production.
+
 Key components include:
 - **`guardar_run.py`**: Prepares the `run_folder` by organizing the race video (`Movie_*.mp4`) and necessary log files (`winner_log.csv`). It also maintains historical data in `historico_runs.xlsx` for lead times and winners.
+- **`log_canciones.csv`**: Acts as the main queue of songs, specifying which tracks from the `canciones` folder should be processed and used in each run.
+- **`winner_log.csv`**: Serves as the song order queue during the video generation process. This file maps the race leader at each moment to the corresponding audio track in the `canciones` folder.
 - **`voice_removal.py`**: Downloads, processes, and organizes audio files into the `canciones` folder. It extracts 60-second segments from YouTube based on metadata in `log_canciones.csv`, separates vocals and music, and ensures all audio files are ready for synchronization.
-- **`log_canciones.csv`**: A key metadata file containing the YouTube URLs, start times, and track names required for processing and organizing the audio files.
 
 Together, these components feed into the `generate-videos.py` script, which combines the organized run video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
 
@@ -75,7 +81,7 @@ This process is supported by two fundamental subprocesses:
 - **Purpose**: This script ensures the `canciones` folder is filled with the required audio files of songs. It prepares audio files for synchronization with run videos while maintaining a clean backup system.
 - [View Process Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/voice_removal.png)
 
-These three scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
+These two scripts (along with `generate-videos.py`) form **the backbone of the project**, transforming data and songs into engaging visual content.
 
 ---
 
