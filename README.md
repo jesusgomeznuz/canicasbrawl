@@ -163,7 +163,6 @@ This section explores the unique workflows of these scripts, showing:
 In this section, you'll see how ChatGPT o1-preview improves 1vs1 races in CanicasBrawl, with Marceline competing against Dipper. We'll start with the original setup of 8 marbles, analyze the data, and show how the race evolves with AI-generated assignments.
 
 ### Initial Setup
-This section highlights the original race setup and its corresponding data from the `winner_log.csv`.
 
 #### Race Setup Photo
 ![Initial Setup](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/initial_setup.jpg)
@@ -263,7 +262,7 @@ The AI proposed the following optimized teams based on the total times:
 The following video showcases the **Original Setup** versus the **AI-Optimized Setup**. Observe how the changes in the marble arrangement impact the race dynamics.
 
 #### Side-by-Side Comparison Video
-[Watch the Comparison](path/to/comparison_video.mp4)
+<iframe src="https://drive.google.com/file/d/1fcl16KqnHXeUDdfe-ZsutFwzEGX08mVZ/preview" width="640" height="480" allow="autoplay"></iframe>
 
 In addition, this video includes a demonstration of the script `generate-videos-jammable.py` in action. 
 
