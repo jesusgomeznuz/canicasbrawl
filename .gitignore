@@ -5,7 +5,6 @@
 
 # Excluir directorios completos
 backups/
-canciones/
 CanicasBrawl/
 Capcut/
 character/
@@ -16,18 +15,18 @@ Metricool/
 parche huggingface/
 Production/
 raw production/
-Runs/
 
-# Incluir los runs específicos
-!/Runs/Run162/
-!/Runs/Run163/
+# Ignorar todo en Runs y canciones por defecto
+Runs/*
+canciones/*
 
-# Incluir archivos específicos dentro de Run162 y Run163
-/Runs/Run162/*
-!/Runs/Run162/*.csv
-/Runs/Run163/*
-!/Runs/Run163/*.csv
+# Ignorar carpetas específicas en scripts
+scripts/selenium/
+scripts/backup/
 
-# Incluir las canciones específicas
-!/canciones/rosapastel.mp3
-!/canciones/ecosdeamor.mp3
+# Ignorar archivos específicos en scripts
+scripts/mp3.py
+scripts/muelle.py
+scripts/parchar_voces.py
+scripts/dual_winner_log.csv
+scripts/generate-videos-dual.py
