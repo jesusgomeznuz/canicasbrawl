@@ -292,13 +292,14 @@ The optimization process demonstrates the scalability and adaptability of **Cani
 
 To conclude, here are two additional diagrams highlighting valuable scripts that enhance the understanding of **CanicasBrawl's** functionality:
 
-#### 1. Final Audio Creation (`create_final_audio`)
-This diagram demonstrates how the script combines audio tracks, aligns them based on race data, and overlays them with the instrumental track to produce the final race audio:
-[Final Audio Creation Diagram](https://yourlink.com/create_final_audio-diagram.png)
+#### 1. Winner Log Generation (`WinnerTracker.cs`)
+This diagram provides a visual overview of the `WinnerTracker.cs` script in Unity. It showcases how the script tracks the current race leader in real time and logs transitions in leadership to the `winner_log.csv` file. The diagram highlights interactions with `WinnerDetector`, ensuring accurate data capture for post-race analytics.
+[Winner Log Generation Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/WinnerTracker.png)
 
-#### 2. Winner Log Generation (`Algo.cs`)
-This diagram outlines the Unity C# script used to generate the `winner_log.csv`, which records race leader transitions in real time:
-[Winner Log Generation Diagram](https://yourlink.com/winner_log-generation-diagram.png)
+#### 2. Final Audio Creation (`create_final_audio`)
+This diagram illustrates how the `create_final_audio` function processes audio tracks to align them with race data. It overlays normalized player segments with an instrumental track to create the final race audio. This process ensures that each race has a unique and dynamic soundtrack.
+[Final Audio Creation Diagram](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/create_final_audio.png)
+
 
 ---
 
