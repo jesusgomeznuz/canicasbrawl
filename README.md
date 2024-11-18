@@ -25,14 +25,10 @@ The project is organized into the following key folders and files:
 ### Overview
 The core of the project is the integration of multiple scripts and processes, all working together to produce **CanicasBrawl** videos. The main script, `generate-videos.py`, connects these elements to ensure seamless video production.
 
-### Overview
-The core of the project is the integration of multiple scripts and processes, all working together to produce **CanicasBrawl** videos. The main script, `generate-videos.py`, connects these elements to ensure seamless video production.
-
 Key components include:
 - **`guardar_run.py`**: Prepares the `run_folder` by organizing the race video (`Movie_*.mp4`) and necessary log files (`winner_log.csv`). It also maintains historical data in `historico_runs.xlsx` for lead times and winners.
-- **`log_canciones.csv`**: Acts as the main queue of songs, specifying which tracks from the `canciones` folder should be processed and used in each run.
-- **`winner_log.csv`**: Serves as the song order queue during the video generation process. This file maps the race leader at each moment to the corresponding audio track in the `canciones` folder.
 - **`voice_removal.py`**: Downloads, processes, and organizes audio files into the `canciones` folder. It extracts 60-second segments from YouTube based on metadata in `log_canciones.csv`, separates vocals and music, and ensures all audio files are ready for synchronization.
+- **`log_canciones.csv`**: Acts as the main queue of songs, specifying which tracks from the `canciones` folder should be processed and used in each run.
 
 Together, these components feed into the `generate-videos.py` script, which combines the organized run video, synchronized audio tracks, and additional data to produce the final **CanicasBrawl** videos.
 
