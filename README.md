@@ -160,7 +160,7 @@ This section explores the unique workflows of these scripts, showing:
 
 ## Interactive Example: AI-Generated 1vs1 Races
 
-In this section, you'll explore how AI optimizations enhance the dynamics of 1vs1 (Marceline vs Dipper) races in **CanicasBrawl**. We'll start with the original setup of 8 marbles, analyze the data, and show how the race evolves with AI-generated assignments.
+In this section, you'll see how ChatGPT o1-preview improves 1vs1 races in CanicasBrawl, with Marceline competing against Dipper. We'll start with the original setup of 8 marbles, analyze the data, and show how the race evolves with AI-generated assignments.
 
 ### Initial Setup
 This section highlights the original race setup and its corresponding data from the `winner_log.csv`.
