@@ -261,8 +261,8 @@ The AI proposed the following optimized teams based on the total times:
 
 The following video showcases the **Original Setup** versus the **AI-Optimized Setup**. Observe how the changes in the marble arrangement impact the race dynamics.
 
-#### Side-by-Side Comparison Video
-<iframe src="https://drive.google.com/file/d/1fcl16KqnHXeUDdfe-ZsutFwzEGX08mVZ/preview" width="640" height="480" allow="autoplay"></iframe>
+### Side-by-Side Comparison Video
+[Watch the Comparison Video on Google Drive](https://drive.google.com/file/d/1fcl16KqnHXeUDdfe-ZsutFwzEGX08mVZ/view?usp=sharing)
 
 In addition, this video includes a demonstration of the script `generate-videos-jammable.py` in action. 
 
