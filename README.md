@@ -160,24 +160,16 @@ This section explores the unique workflows of these scripts, showing:
 
 ## Interactive Example: AI-Generated 1vs1 Races
 
-### Overview
-This section demonstrates how AI is used to optimize **1vs1 races** in **CanicasBrawl**. The example walks through:
-1. The initial setup of the race.
-2. Interaction with AI to refine the marble positions.
-3. Execution of the `generate-videos-jammable.py` script with the new setup.
-4. A final visual comparison between the **Original Random Setup** and the **AI-Optimized Setup**.
-
----
-
 ### Initial Setup
-Here’s a snapshot of the initial race setup and the corresponding data from `winner_log.csv`:
+This section highlights the original race setup and its corresponding data from the `winner_log.csv`.
 
 #### Race Setup Photo
 ![Initial Setup](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/initial_setup.jpg)
 
-#### Winner Log (`winner_log.csv`) and Winner List (`winner_list.csv`)
+#### Winner Log Data
+The original race times and positions from `winner_log.csv` and `winner_list.csv` are summarized below:
+
 ```csv
-VideoGame> python duplicates.py
 Table 1 (original without duplicates):
             Time   Winner   Nickname
 0   00:00:00:000  Player5   Mordecai
@@ -227,14 +219,14 @@ Table 2 (total times per player):
 7      Quico   5.300
 ```
 
-### Interaction with AI
-To optimize the race, **ChatGPT** was used to recommend a new arrangement for the marbles based on the times in `winner_log.csv`.
+### AI-Optimized Arrangement
+To improve the race dynamics, **ChatGPT** was used to suggest a new arrangement based on the times from the `winner_log.csv`.
 
 #### ChatGPT Interaction
-You can view the full interaction [here](link/to/chatgpt_interaction.md).
+You can view the full conversation with **ChatGPT** [here](link/to/chatgpt_interaction.md).
 
-#### Key Result
-ChatGPT suggested the following arrangement:
+#### Key Result: Suggested Marble Assignments
+The AI proposed the following optimized teams based on the total times:
 
 ##### Marceline:
 - **Player1**: Finn - 16.899 s  
@@ -264,26 +256,25 @@ ChatGPT suggested the following arrangement:
 
 ---
 
-### Script Execution
-Using the `generate-videos-jammable.py` script, the voices were generated for the new setup.
+### Visual Comparison
 
-#### Demo Video: Generating Voices
-[Watch Voice Generation in Action](path/to/voice_generation_demo.mp4)
+The following video showcases the **Original Setup** versus the **AI-Optimized Setup**. Observe how the changes in the marble arrangement impact the race dynamics.
 
----
-
-### Final Comparison
-Below is a side-by-side comparison of the **Original Random Setup** vs. the **AI-Optimized Setup**, showcasing how the changes impacted the final video:
-
-#### Comparison Video
-[Watch Side-by-Side Comparison](path/to/comparison_video.mp4)
+#### Side-by-Side Comparison Video
+[Watch the Comparison](path/to/comparison_video.mp4)
 
 ---
 
 ### Key Takeaways
-- The AI-optimized setup resulted in a more balanced and visually engaging race.
-- This example highlights how AI can be used not only for optimization but also to demonstrate the flexibility and scalability of the **CanicasBrawl** workflow.
 
+1. The AI-optimized setup resulted in:
+   - More balanced team times.
+   - A visually engaging and competitive race.
+2. The integration of **ChatGPT** allowed for:
+   - Simplified decision-making in marble assignments.
+   - Increased flexibility in workflow.
+
+The optimization process demonstrates the scalability and adaptability of **CanicasBrawl** for dynamic content creation.
 ---
 
 ## Contact
