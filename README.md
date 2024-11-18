@@ -223,7 +223,7 @@ Table 2 (total times per player):
 To improve the race dynamics, **ChatGPT** was used to suggest a new arrangement based on the times from the `winner_log.csv`.
 
 #### ChatGPT Interaction
-You can view the full conversation with **ChatGPT** [here](link/to/chatgpt_interaction.md).
+You can view the full conversation with **ChatGPT** [here](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/chatgpt_interaction.md).
 
 #### Key Result: Suggested Marble Assignments
 The AI proposed the following optimized teams based on the total times:
@@ -275,6 +275,7 @@ The following video showcases the **Original Setup** versus the **AI-Optimized S
    - Increased flexibility in workflow.
 
 The optimization process demonstrates the scalability and adaptability of **CanicasBrawl** for dynamic content creation.
+
 ---
 
 ## Contact
