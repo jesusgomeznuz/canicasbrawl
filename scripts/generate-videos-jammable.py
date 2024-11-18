@@ -158,7 +158,7 @@ def convert_audio_with_selenium(links_nicknames, song_name):
     """
     service = Service('C:/chromedriver-win64/chromedriver.exe')
     chrome_options = Options()
-    #chrome_options.add_argument("--headless")  # Runs in headless mode
+    chrome_options.add_argument("--headless")  # Runs in headless mode
     chrome_options.add_argument("--start-maximized")
     driver = webdriver.Chrome(service=service, options=chrome_options)
     
