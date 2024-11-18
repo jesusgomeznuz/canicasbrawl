@@ -173,7 +173,7 @@ This section demonstrates how AI is used to optimize **1vs1 races** in **Canicas
 Here’s a snapshot of the initial race setup and the corresponding data from `winner_log.csv`:
 
 #### Race Setup Photo
-![Initial Setup](path/to/initial_setup_photo.png)
+![Initial Setup](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/initial_setup.jpg)
 
 #### Winner Log (`winner_log.csv`) and Winner List (`winner_list.csv`)
 ```csv
@@ -260,7 +260,7 @@ ChatGPT suggested the following arrangement:
 ---
 
 #### New Setup Photo
-![AI-Optimized Setup](path/to/ai_optimized_setup_photo.png)
+![AI-Optimized Setup](https://github.com/jesusgomeznuz/canicasbrawl/blob/master/assets/ai-optimized-setup.jpg)
 
 ---
 
